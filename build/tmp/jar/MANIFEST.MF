@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Specification-Title: examplemod
+Specification-Vendor: examplemodsareus
+Specification-Version: 1
+Implementation-Title: GildedIngot
+Implementation-Version: 1.0
+Implementation-Vendor: examplemodsareus
+Implementation-Timestamp: 2021-03-01T19:02:55+0200
+

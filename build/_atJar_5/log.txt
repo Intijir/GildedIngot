@@ -1,0 +1,5 @@
+Args: "--inJar", "/Users/apple/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.16.5-36.0.0/forge-1.16.5-36.0.0-injected.jar", "--outJar", "/Users/apple/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.16.5-36.0.0_mapped_snapshot_20201028-1.16.3/forge-1.16.5-36.0.0_mapped_snapshot_20201028-1.16.3.jar", "--logFile", "accesstransform.log", "--atFile", "/Users/apple/Desktop/Mods/GildedIngot/build/_atJar_5/parent_at.cfg"
+Classpath: /Users/apple/.gradle/caches/forge_gradle/maven_downloader/net/minecraftforge/accesstransformers/1.0.5/accesstransformers-1.0.5-fatjar.jar
+WorkDir: /Users/apple/Desktop/Mods/GildedIngot/build/_atJar_5
+Main: net.minecraftforge.accesstransformer.TransformerProcessor
+====================================

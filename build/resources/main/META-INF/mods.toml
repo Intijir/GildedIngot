@@ -1,0 +1,43 @@
+modLoader="javafml" #mandatory
+
+loaderVersion="[35,)" #mandatory
+
+license="All rights reserved"
+
+[[mods]] #mandatory
+
+modId="gildedingot" #mandatory
+
+version="1.16.4" #mandatory
+
+displayName="GildedIngot" #mandatory
+
+logoFile="new_icon.png" #optional
+
+credits="" #optional
+
+authors="Intijir(Dev) Surreal.Ghiacco(Artist)" #optional
+
+description='''
+This mod adds GildedIngot armor and tools and some other stuff
+'''
+
+[[dependencies.gildedingot]] #optional
+
+    modId="forge" #mandatory
+
+    mandatory=true #mandatory
+
+    versionRange="[35,)" #mandatory
+
+    ordering="NONE"
+
+    side="BOTH"
+
+[[dependencies.gildedingot]]
+    modId="gildedingot"
+    mandatory=true
+
+    versionRange="[1.16.4,1.17)"
+    ordering="NONE"
+    side="BOTH"

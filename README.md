@@ -1,2 +1,2 @@
 # GildedIngot
- The source code for my gildedingot mod
+ The source files for my mod gildedingot

@@ -1,0 +1,1 @@
+You can use the source code but you are not allowed to publish it anywhere other than in the pull requests
