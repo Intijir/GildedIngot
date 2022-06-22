@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "gildedingot:blocks/gilded_bricks_top",
+    "side": "gildedingot:blocks/gilded_bricks_side"
+  }
+}

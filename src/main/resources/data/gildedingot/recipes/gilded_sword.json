@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    " x ",
+    " x ",
+    " y "
+  ],
+  "key":
+  {
+    "x":
+    {
+      "item": "gildedingot:gilded_ingot"
+    },
+    "y":{
+      "item": "minecraft:stick"
+    }
+  },
+  "result":
+  {
+    "item": "gildedingot:gilded_sword",
+    "count": 1
+  }
+}

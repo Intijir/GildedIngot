@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/crop",
+  "textures": {
+    "crop": "gildedingot:blocks/warped_nether_wart_crop_stage0"
+  }
+}

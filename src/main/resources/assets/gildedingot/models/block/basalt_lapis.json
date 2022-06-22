@@ -1,0 +1,12 @@
+{
+  "parent": "block/orientable",
+  "textures": {
+    "up": "gildedingot:blocks/basalt_lapis_top",
+    "down": "gildedingot:blocks/basalt_lapis_top",
+    "south": "gildedingot:blocks/basalt_lapis_side",
+    "north": "gildedingot:blocks/basalt_lapis_side",
+    "west": "gildedingot:blocks/basalt_lapis_side",
+    "east": "gildedingot:blocks/basalt_lapis_side",
+    "particle": "gildedingot:blocks/basalt_lapis_top"
+  }
+}

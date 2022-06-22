@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_top_rh",
+  "textures": {
+    "top": "gildedingot:blocks/gilded_door_top",
+    "bottom": "gildedingot:blocks/gilded_door_bottom"
+  }
+}

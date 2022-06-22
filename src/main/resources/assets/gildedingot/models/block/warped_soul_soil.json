@@ -1,0 +1,12 @@
+{
+  "parent": "block/orientable",
+  "textures": {
+    "up": "gildedingot:blocks/warped_soul_soil_top",
+    "down": "gildedingot:blocks/warped_soul_soil_bottom",
+    "south": "gildedingot:blocks/warped_soul_soil_side",
+    "north": "gildedingot:blocks/warped_soul_soil_side",
+    "west": "gildedingot:blocks/warped_soul_soil_side",
+    "east": "gildedingot:blocks/warped_soul_soil_side",
+    "particle": "gildedingot:blocks/warped_soul_soil_side"
+  }
+}

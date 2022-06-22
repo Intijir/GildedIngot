@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "xy ",
+    "yx ",
+    "   "
+  ],
+  "key":
+  {
+    "x":
+    {
+      "item": "gildedingot:gilded_ingot"
+    },
+    "y":
+    {
+      "item": "minecraft:polished_blackstone"
+    }
+  },
+  "result":
+  {
+    "item": "gildedingot:gilded_bricks",
+    "count": 3
+  }
+}

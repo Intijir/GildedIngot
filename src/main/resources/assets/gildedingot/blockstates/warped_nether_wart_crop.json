@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "age=0": {
+      "model": "gildedingot:block/warped_nether_wart_crop_stage0"
+    },
+    "age=1": {
+      "model": "gildedingot:block/warped_nether_wart_crop_stage1"
+    },
+    "age=2": {
+      "model": "gildedingot:block/warped_nether_wart_crop_stage1"
+    },
+    "age=3": {
+      "model": "gildedingot:block/warped_nether_wart_crop_stage2"
+    }
+  }
+}

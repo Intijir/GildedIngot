@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "xx ",
+    "xx ",
+    "xx "
+  ],
+  "key":
+  {
+    "x":
+    {
+      "item": "gildedingot:gilded_ingot"
+    }
+  },
+  "result":
+  {
+    "item": "gildedingot:gilded_door",
+    "count": 1
+  }
+}

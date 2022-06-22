@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "xyx",
+    "yxy",
+    "xyx"
+  ],
+  "key":
+  {
+    "x":
+    {
+      "item": "minecraft:warped_fungus"
+    },
+    "y":
+    {
+      "item": "minecraft:nether_wart"
+    }
+  },
+  "result":
+  {
+    "item": "gildedingot:warped_wart",
+    "count": 2
+  }
+}
