@@ -1,6 +1,8 @@
 package com.intijir.gildedingot.items;
 
 import com.intijir.gildedingot.GildedIngot;
+import com.intijir.gildedingot.blocks.ModBlocks;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -27,6 +29,17 @@ public class ModItems {
 
     public static final RegistryObject<Item> GILDED_NUGGET = ITEMS.register("gilded_nugget",
             () -> new Item(new Item.Properties().tab(com.intijir.gildedingot.GildedIngot.TAB)));
+
+    public static final RegistryObject<Item> WARPED_WART_SEED =
+            ITEMS.register("warped_wart_seed",
+                    () -> new BlockItem(ModBlocks.WARPED_NETHER_WART_CROP.get(),
+                            new Item.Properties().tab(GildedIngot.TAB)));
+
+    public static final RegistryObject<Item> SHROOM_FRUIT = ITEMS.register("shroom_fruit",
+            () -> new ShroomFruit());
+
+    public static final RegistryObject<Item> WARPED_WART = ITEMS.register("warped_wart",
+            () -> new WarpedWart());
 
     public static void register(IEventBus eventBus){
         ITEMS.register(eventBus);

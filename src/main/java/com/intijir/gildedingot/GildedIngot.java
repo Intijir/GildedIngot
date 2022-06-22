@@ -1,8 +1,11 @@
 package com.intijir.gildedingot;
 
 import com.intijir.gildedingot.blocks.ModBlocks;
+import com.intijir.gildedingot.events.ModEvents;
 import com.intijir.gildedingot.items.ModItems;
 import com.mojang.logging.LogUtils;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
@@ -13,6 +16,7 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
@@ -47,8 +51,17 @@ public class GildedIngot {
 
 
         eventBus.addListener(this::setup);
+        eventBus.addListener(this::clientSetup);
+
+        MinecraftForge.EVENT_BUS.register(new ModEvents());
 
         MinecraftForge.EVENT_BUS.register(this);
+    }
+
+    private void clientSetup(final FMLClientSetupEvent event){
+        ItemBlockRenderTypes.setRenderLayer((Block)ModBlocks.WARPED_NETHER_WART_CROP.get(), RenderType.translucent());
+        ItemBlockRenderTypes.setRenderLayer((Block)ModBlocks.GILDED_GLASS.get(), RenderType.translucent());
+        ItemBlockRenderTypes.setRenderLayer((Block)ModBlocks.GILDED_DOOR.get(), RenderType.translucent());
     }
 
     private void setup(final FMLCommonSetupEvent event) {
