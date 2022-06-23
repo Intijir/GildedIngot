@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smithing",
+  "base": {
+    "item": "minecraft:golden_leggings"
+  },
+  "addition": {
+    "item": "gildedingot:gilded_leggings"
+  },
+  "result": {
+    "item": "gildedingot:gilded_leggings"
+  }
+}

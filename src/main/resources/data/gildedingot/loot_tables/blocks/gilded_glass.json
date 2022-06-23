@@ -1,0 +1,25 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "gildedingot:gilded_glass",
+          "conditions": [
+            {
+              "condition": "minecraft:match_tool",
+              "predicate": {
+                "enchantments": [
+                  {
+                    "enchantment": "minecraft:silk_touch"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

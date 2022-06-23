@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "x x",
+    "xxx",
+    "xxx"
+  ],
+  "key":
+  {
+    "x":
+    {
+      "item": "gildedingot:gilded_ingot"
+    }
+  },
+  "result":
+  {
+    "item": "gildedingot:gilded_chestplate",
+    "count": 1
+  }
+}

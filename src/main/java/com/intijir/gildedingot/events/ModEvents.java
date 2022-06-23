@@ -14,7 +14,7 @@ public class ModEvents {
         if (event.getPlayer().getMainHandItem().getItem() == ModItems.WARPED_WART_SEED.get()){
             if (event.getWorld().getBlockState(event.getPos()).getBlock().equals(Blocks.FARMLAND) ||
                     event.getWorld().getBlockState(event.getPos()).getBlock().equals(Blocks.SOUL_SOIL)){
-                event.setCanceled(true);
+                event.setCanceled(false);
             }
         }
     }
@@ -24,7 +24,7 @@ public class ModEvents {
         if (event.getPlayer().getMainHandItem().getItem() == ModItems.WARPED_WART_SEED.get()){
             if (event.getWorld().getBlockState(event.getPos()).getBlock().equals(Blocks.SOUL_SOIL)){
                 event.getWorld().setBlockAndUpdate(event.getPos(), ModBlocks.WARPED_SOUL_SOIL.get().defaultBlockState());
-                event.getPlayer().getMainHandItem().shrink(2);
+                event.getPlayer().getMainHandItem().shrink(1);
             }
         }
     }

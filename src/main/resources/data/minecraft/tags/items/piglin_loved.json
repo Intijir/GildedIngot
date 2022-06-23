@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "gildedingot:gilded_ingot",
+    "gildedingot:gilded_helmet",
+    "gildedingot:gilded_chestplate",
+    "gildedingot:gilded_leggings",
+    "gildedingot:gilded_boots",
+    "gildedingot:gilded_sword",
+    "gildedingot:gilded_pickaxe",
+    "gildedingot:gilded_shovel",
+    "gildedingot:gilded_hoe",
+    "gildedingot:gilded_axe"
+  ]
+}

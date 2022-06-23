@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "gildedingot:gilded_bricks",
+    "gildedingot:gilded_block",
+    "gildedingot:blue_nether_bricks",
+    "gildedingot:smooth_blackstone",
+    "gildedingot:basalt_lapis",
+    "gildedingot:gilded_door"
+  ]
+}

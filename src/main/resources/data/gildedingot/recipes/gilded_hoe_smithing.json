@@ -1,0 +1,12 @@
+	{
+  "type": "minecraft:smithing",
+  "base": {
+    "item": "minecraft:golden_hoe"
+  },
+  "addition": {
+    "item": "gildedingot:gilded_hoe"
+  },
+  "result": {
+    "item": "gildedingot:gilded_hoe"
+  }
+}

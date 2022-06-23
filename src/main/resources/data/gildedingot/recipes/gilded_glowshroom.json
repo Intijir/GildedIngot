@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "xxx",
+    "xyx",
+    "xxx"
+  ],
+  "key":
+  {
+    "x":
+    {
+      "item": "minecraft:gold_nugget"
+    },
+    "y":
+    {
+      "item": "minecraft:shroomlight"
+    }
+  },
+  "result":
+  {
+    "item": "gildedingot:gilded_glowshroom",
+    "count": 1
+  }
+}

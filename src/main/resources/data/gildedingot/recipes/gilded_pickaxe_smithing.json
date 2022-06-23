@@ -1,0 +1,12 @@
+	{
+  "type": "minecraft:smithing",
+  "base": {
+    "item": "minecraft:golden_pickaxe"
+  },
+  "addition": {
+    "item": "gildedingot:gilded_pickaxe"
+  },
+  "result": {
+    "item": "gildedingot:gilded_pickaxe"
+  }
+}
