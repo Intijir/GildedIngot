@@ -37,7 +37,7 @@ public class GildedIngot {
         }
     };
 
-    public static String MOD_ID = "gildedingot";
+    public static final String MOD_ID = "gildedingot";
 
     // Directly reference a slf4j logger
     private static final Logger LOGGER = LogUtils.getLogger();
