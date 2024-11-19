@@ -17,11 +17,11 @@ public class ModPlacedFeatures {
             DeferredRegister.create(Registry.PLACED_FEATURE_REGISTRY, GildedIngot.MOD_ID);
 
 
-/*
+
     public static final RegistryObject<PlacedFeature> NETHER_BASALT_LAPIS_PLACED = PLACED_FEATURES.register("basalt_lapis_placed",
             () -> new PlacedFeature(ModConfiguredFeatures.BASALT_LAPIS.getHolder().get(), ModOrePlacement.commonOrePlacement(5, // VeinsPerChunk
                     HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(50), VerticalAnchor.aboveBottom(110)))));
-*/
+
 
 
     public static final RegistryObject<PlacedFeature> NETHER_GILDED_BLACKSTONE_PLACED = PLACED_FEATURES.register("nether_gilded_blackstone_placed",

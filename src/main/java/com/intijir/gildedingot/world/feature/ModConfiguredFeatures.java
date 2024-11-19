@@ -2,6 +2,7 @@ package com.intijir.gildedingot.world.feature;
 
 
 
+import com.google.common.base.Suppliers;
 import com.intijir.gildedingot.GildedIngot;
 import com.intijir.gildedingot.blocks.ModBlocks;
 import net.minecraft.core.Holder;
@@ -17,19 +18,19 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 public class ModConfiguredFeatures {
     public static final DeferredRegister<ConfiguredFeature<?, ?>> CONFIGURED_FEATURES =
             DeferredRegister.create(Registry.CONFIGURED_FEATURE_REGISTRY, GildedIngot.MOD_ID);
 
-/*
+
     // Basalt Lapis
-    public static final List<OreConfiguration.TargetBlockState> NETHER_BASALT_LAPIS = List.of(
-            OreConfiguration.target(OreFeatures.NETHER_ORE_REPLACEABLES, ModBlocks.BASALT_LAPIS.get().defaultBlockState()));
+    public static final Supplier<List<OreConfiguration.TargetBlockState>> NETHER_BASALT_LAPIS = Suppliers.memoize(() -> List.of(
+            OreConfiguration.target(OreFeatures.NETHER_ORE_REPLACEABLES, ModBlocks.BASALT_LAPIS.get().defaultBlockState())));
 
     public static final RegistryObject<ConfiguredFeature<?, ?>> BASALT_LAPIS = CONFIGURED_FEATURES.register("basalt_lapis",
-            () -> new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(NETHER_BASALT_LAPIS, 9)));
-*/
+            () -> new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(NETHER_BASALT_LAPIS.get(), 9)));
 
 
     // Gilded Blackstone
