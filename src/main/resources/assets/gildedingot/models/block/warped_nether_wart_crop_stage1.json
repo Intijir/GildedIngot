@@ -1,4 +1,5 @@
 {
+  "render_type": "minecraft:cutout",
   "parent": "minecraft:block/crop",
   "textures": {
     "crop": "gildedingot:blocks/warped_nether_wart_crop_stage1"

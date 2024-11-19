@@ -2,39 +2,46 @@ package com.intijir.gildedingot.world.feature;
 
 
 
+import com.intijir.gildedingot.GildedIngot;
 import com.intijir.gildedingot.blocks.ModBlocks;
 import net.minecraft.core.Holder;
+import net.minecraft.core.Registry;
 import net.minecraft.data.worldgen.features.FeatureUtils;
 import net.minecraft.data.worldgen.features.OreFeatures;
-import net.minecraft.data.worldgen.features.TreeFeatures;
-import net.minecraft.data.worldgen.placement.PlacementUtils;
-import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.feature.WeightedPlacedFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.*;
-import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
-import net.minecraft.world.level.levelgen.feature.foliageplacers.BlobFoliagePlacer;
-import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
-import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
-import net.minecraft.world.level.levelgen.placement.PlacedFeature;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.RegistryObject;
 
 import java.util.List;
 
 public class ModConfiguredFeatures {
+    public static final DeferredRegister<ConfiguredFeature<?, ?>> CONFIGURED_FEATURES =
+            DeferredRegister.create(Registry.CONFIGURED_FEATURE_REGISTRY, GildedIngot.MOD_ID);
 
-
-
-    public static final List<OreConfiguration.TargetBlockState> OVERWORLD_BASALT_LAPIS = List.of(
+/*
+    // Basalt Lapis
+    public static final List<OreConfiguration.TargetBlockState> NETHER_BASALT_LAPIS = List.of(
             OreConfiguration.target(OreFeatures.NETHER_ORE_REPLACEABLES, ModBlocks.BASALT_LAPIS.get().defaultBlockState()));
 
-    public static final Holder<ConfiguredFeature<OreConfiguration, ?>> BASALT_LAPIS = FeatureUtils.register("basalt_lapis",
-            Feature.ORE, new OreConfiguration(OVERWORLD_BASALT_LAPIS, 9));
+    public static final RegistryObject<ConfiguredFeature<?, ?>> BASALT_LAPIS = CONFIGURED_FEATURES.register("basalt_lapis",
+            () -> new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(NETHER_BASALT_LAPIS, 9)));
+*/
 
+
+    // Gilded Blackstone
     public static final List<OreConfiguration.TargetBlockState> NETHER_GILDED_BLACKSTONE = List.of(
             OreConfiguration.target(OreFeatures.NETHER_ORE_REPLACEABLES, Blocks.GILDED_BLACKSTONE.defaultBlockState()));
 
-    public static final Holder<ConfiguredFeature<OreConfiguration, ?>> GILDED_BLACKSTONE = FeatureUtils.register("gilded_blackstone",
-            Feature.ORE, new OreConfiguration(NETHER_GILDED_BLACKSTONE, 3));
+    public static final RegistryObject<ConfiguredFeature<?, ?>> GILDED_BLACKSTONE = CONFIGURED_FEATURES.register("gilded_blackstone",
+            () -> new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(NETHER_GILDED_BLACKSTONE, 3)));
+
+
+
+    public static void register(IEventBus eventBus) {
+        CONFIGURED_FEATURES.register(eventBus);
+    }
 }

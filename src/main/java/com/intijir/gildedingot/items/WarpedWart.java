@@ -3,8 +3,6 @@ package com.intijir.gildedingot.items;
 import com.intijir.gildedingot.GildedIngot;
 import com.intijir.gildedingot.util.KeyboardHelper;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextColor;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
@@ -12,6 +10,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -28,12 +27,12 @@ public class WarpedWart extends Item {
             .build());
 
     @Override
-    public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
+    public void appendHoverText(@NotNull ItemStack pStack, @Nullable Level pLevel, @NotNull List<Component> pTooltipComponents, @NotNull TooltipFlag pIsAdvanced) {
         if (KeyboardHelper.isHoldingShift()){
-            pTooltipComponents.add(1, new TextComponent("\u00A76"+"Gives you fire resistance for 10 seconds or 200 ticks with a probability of 40% "));
+            pTooltipComponents.add(1, Component.literal("§6"+"Gives you fire resistance for 10 seconds or 200 ticks with a probability of 40% "));
         }
         else{
-            pTooltipComponents.add(new TextComponent("\u00A77" + "Hold " + "\u00A7e" + "Shift " + "\u00A77" + "for more information"));
+            pTooltipComponents.add(Component.literal("§7" + "Hold " + "§e" + "Shift " + "§7" + "for more information"));
         }
 
         super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
