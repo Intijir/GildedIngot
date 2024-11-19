@@ -29,6 +29,10 @@ public class WarpedNetherWartCrop extends BeetrootBlock {
         return AGE;
     }
 
+    public int getMaxAge() {
+        return 3;
+    }
+
     protected @NotNull ItemLike getBaseSeedId() {
         return ModItems.WARPED_WART_SEED.get();
     }
@@ -40,7 +44,6 @@ public class WarpedNetherWartCrop extends BeetrootBlock {
         if (pRandomSource.nextInt(3) != 0) {
             super.randomTick(pState, pLevel, pPos, pRandomSource);
         }
-
     }
 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {

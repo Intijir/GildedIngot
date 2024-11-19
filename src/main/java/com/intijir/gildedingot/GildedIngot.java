@@ -10,7 +10,6 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.MinecraftForge;
-//import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -22,7 +21,7 @@ import org.slf4j.Logger;
 @Mod("gildedingot")
 public class GildedIngot {
 
-    public static final CreativeModeTab TAB = new CreativeModeTab("GildedIngotMod") {
+    public static final CreativeModeTab TAB = new CreativeModeTab("GildedIngot") {
         @Override
         public ItemStack makeIcon() {
             return new ItemStack(ModItems.GILDED_INGOT.get());
@@ -56,7 +55,6 @@ public class GildedIngot {
     }
 
     private void setup(final FMLCommonSetupEvent event) {
-        // Some preinit code
         LOGGER.info("HELLO FROM PREINIT");
         LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getName());
     }
