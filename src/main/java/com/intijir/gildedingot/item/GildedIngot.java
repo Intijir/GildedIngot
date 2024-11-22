@@ -1,4 +1,4 @@
-package com.intijir.gildedingot.items;
+package com.intijir.gildedingot.item;
 
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -8,6 +8,6 @@ public class GildedIngot extends Item {
         return true;
     }
     public GildedIngot() {
-        super(new Properties().tab(com.intijir.gildedingot.GildedIngot.TAB));
+        super(new Properties());
     }
 }

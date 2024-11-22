@@ -1,4 +1,4 @@
-package com.intijir.gildedingot.blocks;
+package com.intijir.gildedingot.block;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -20,13 +20,12 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
-import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.MapColor;
+
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.Random;
 
 public class WarpedSoulSoil extends Block {
     public static final IntegerProperty MOISTURE = BlockStateProperties.MOISTURE;
@@ -34,7 +33,7 @@ public class WarpedSoulSoil extends Block {
     public static final int MAX_MOISTURE = 7;
 
     public WarpedSoulSoil() {
-        super(Properties.of(Material.SAND).strength(0.5f, 0.5f).sound(SoundType.SAND));
+        super(Properties.of().mapColor(MapColor.SAND).strength(0.5f, 0.5f).sound(SoundType.SAND));
         this.registerDefaultState(this.stateDefinition.any().setValue(MOISTURE, Integer.valueOf(0)));
     }
 
@@ -47,7 +46,7 @@ public class WarpedSoulSoil extends Block {
 
     public boolean canSurvive(@NotNull BlockState pState, LevelReader pLevel, BlockPos pPos) {
         BlockState blockstate = pLevel.getBlockState(pPos.above());
-        return !blockstate.getMaterial().isSolid() || blockstate.getBlock() instanceof FenceGateBlock || blockstate.getBlock() instanceof MovingPistonBlock;
+        return !blockstate.isSolid() || blockstate.getBlock() instanceof FenceGateBlock || blockstate.getBlock() instanceof MovingPistonBlock;
     }
 
     public BlockState getStateForPlacement(BlockPlaceContext pContext) {

@@ -1,4 +1,4 @@
-package com.intijir.gildedingot.items;
+package com.intijir.gildedingot.item;
 
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.crafting.Ingredient;

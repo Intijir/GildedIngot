@@ -1,4 +1,4 @@
-package com.intijir.gildedingot.world.feature;
+package com.intijir.gildedingot.worldgen;
 
 import net.minecraft.world.level.levelgen.placement.*;
 
