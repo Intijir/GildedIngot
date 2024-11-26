@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "gildedingot:blocks/gilded_bricks"
+    "all": "gildedingot:block/gilded_bricks"
   }
 }

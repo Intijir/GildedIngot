@@ -1,6 +1,6 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "all": "gildedingot:blocks/gilded_glowshroom"
+    "all": "gildedingot:block/gilded_glowshroom"
   }
 }

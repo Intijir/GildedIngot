@@ -1,12 +1,12 @@
 {
-  "parent": "block/orientable",
+  "parent": "minecraft:block/orientable",
   "textures": {
-    "up": "gildedingot:blocks/blaze_furnace_top",
-    "down": "gildedingot:blocks/blaze_furnace_side",
-    "south": "gildedingot:blocks/blaze_furnace_side",
-    "north": "gildedingot:blocks/blaze_furnace_side",
-    "west": "gildedingot:blocks/blaze_furnace_side",
-    "east": "gildedingot:blocks/blaze_furnace_front",
-    "particle": "gildedingot:blocks/blaze_furnace_side"
+    "up": "gildedingot:block/blaze_furnace_top",
+    "down": "gildedingot:block/blaze_furnace_side",
+    "south": "gildedingot:block/blaze_furnace_side",
+    "north": "gildedingot:block/blaze_furnace_side",
+    "west": "gildedingot:block/blaze_furnace_side",
+    "east": "gildedingot:block/blaze_furnace_front",
+    "particle": "gildedingot:block/blaze_furnace_side"
   }
 }

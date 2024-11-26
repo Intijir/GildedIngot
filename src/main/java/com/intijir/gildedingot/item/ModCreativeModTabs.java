@@ -46,6 +46,7 @@ public class ModCreativeModTabs {
                         pOutput.accept(ModBlocks.BLUE_NETHER_BRICKS.get());
                         pOutput.accept(ModBlocks.SMOOTH_BLACKSTONE.get());
                         pOutput.accept(ModBlocks.GILDED_PILE.get());
+                        pOutput.accept(ModBlocks.BASALT_LAPIS.get());
                         pOutput.accept(ModBlocks.GILDED_GLASS.get());
                         pOutput.accept(ModBlocks.GILDED_GLOWSHROOM.get());
                         pOutput.accept(ModBlocks.GILDED_DOOR.get());

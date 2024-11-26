@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"parent": "block/thin_block",
 	"textures": {
-		"0": "gildedingot:blocks/gilded_bricks",
-		"particle": "gildedingot:blocks/gilded_bricks"
+		"0": "gildedingot:block/gilded_bricks",
+		"particle": "gildedingot:block/gilded_bricks"
 	},
 	"elements": [
 		{

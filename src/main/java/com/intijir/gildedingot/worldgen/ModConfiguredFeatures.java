@@ -24,7 +24,7 @@ public class ModConfiguredFeatures {
         register(context, NETHER_BASALT_LAPIS_ORE_KEY, Feature.ORE, new OreConfiguration(basaltReplaceables,
                 ModBlocks.BASALT_LAPIS.get().defaultBlockState(), 9));
         register(context, NETHER_GILDED_BLACKSTONE_ORE_KEY, Feature.ORE, new OreConfiguration(netherrackReplacables,
-                Blocks.GILDED_BLACKSTONE.defaultBlockState(), 3));
+                Blocks.GILDED_BLACKSTONE.defaultBlockState(), 10));
     }
 
     // Helper funtions

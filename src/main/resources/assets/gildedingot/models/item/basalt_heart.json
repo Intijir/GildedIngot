@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "gildedingot:items/basalt_heart"
+    "layer0": "gildedingot:item/basalt_heart"
   }
 }

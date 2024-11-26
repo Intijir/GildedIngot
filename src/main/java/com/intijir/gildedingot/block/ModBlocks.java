@@ -43,7 +43,7 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> GILDED_GLASS = registerBlock("gilded_glass",
             () -> new Block(BlockBehaviour.Properties.of().strength(0.3F, 0.3F)
-                    .requiresCorrectToolForDrops().sound(SoundType.GLASS).noOcclusion()));
+                    .sound(SoundType.GLASS).noOcclusion()));
 
     public static final RegistryObject<Block> GILDED_GLOWSHROOM = registerBlock("gilded_glowshroom",
             () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.CLAY).strength(1)

@@ -1,6 +1,6 @@
 {
   "parent": "item/handheld",
   "textures": {
-    "layer0": "gildedingot:items/gilded_pickaxe"
+    "layer0": "gildedingot:item/gilded_pickaxe"
   }
 }

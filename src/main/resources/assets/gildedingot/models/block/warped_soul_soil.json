@@ -1,12 +1,12 @@
 {
-  "parent": "block/orientable",
+  "parent": "minecraft:block/orientable",
   "textures": {
-    "up": "gildedingot:blocks/warped_soul_soil_top",
-    "down": "gildedingot:blocks/warped_soul_soil_bottom",
-    "south": "gildedingot:blocks/warped_soul_soil_side",
-    "north": "gildedingot:blocks/warped_soul_soil_side",
-    "west": "gildedingot:blocks/warped_soul_soil_side",
-    "east": "gildedingot:blocks/warped_soul_soil_side",
-    "particle": "gildedingot:blocks/warped_soul_soil_side"
+    "up": "gildedingot:block/warped_soul_soil_top",
+    "down": "gildedingot:block/warped_soul_soil_bottom",
+    "south": "gildedingot:block/warped_soul_soil_side",
+    "north": "gildedingot:block/warped_soul_soil_side",
+    "west": "gildedingot:block/warped_soul_soil_side",
+    "east": "gildedingot:block/warped_soul_soil_side",
+    "particle": "gildedingot:block/warped_soul_soil_side"
   }
 }

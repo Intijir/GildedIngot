@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "gildedingot:items/gilded_pebble"
+    "layer0": "gildedingot:item/gilded_pebble"
   }
 }
