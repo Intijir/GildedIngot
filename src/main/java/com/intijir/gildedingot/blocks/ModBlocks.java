@@ -6,6 +6,8 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.GlassBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
@@ -36,7 +38,7 @@ public class ModBlocks {
                     .requiresCorrectToolForDrops().sound(SoundType.STONE)), GildedIngot.TAB);
 
     public static final RegistryObject<Block> GILDED_PILE = registerBlock("gilded_pile",
-            () -> new GildedPile(), GildedIngot.TAB);
+            GildedPile::new, GildedIngot.TAB);
 
     public static final RegistryObject<Block> BASALT_LAPIS = registerBlock("basalt_lapis",
             () -> new Block(BlockBehaviour.Properties.of(Material.STONE).strength(1.25F, 4.2F)
@@ -44,20 +46,20 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> GILDED_GLASS = registerBlock("gilded_glass",
             () -> new Block(BlockBehaviour.Properties.of(Material.GLASS).strength(0.3F, 0.3F)
-                    .requiresCorrectToolForDrops().sound(SoundType.GLASS).noOcclusion()), GildedIngot.TAB);
+                    .sound(SoundType.GLASS).noOcclusion()), GildedIngot.TAB);
 
     public static final RegistryObject<Block> GILDED_GLOWSHROOM = registerBlock("gilded_glowshroom",
             () -> new Block(BlockBehaviour.Properties.of(Material.CLAY).strength(1)
                     .requiresCorrectToolForDrops().sound(SoundType.SHROOMLIGHT).lightLevel(state -> {return 15;})), GildedIngot.TAB);
 
     public static final RegistryObject<Block> GILDED_DOOR = registerBlock("gilded_door",
-            () -> new GildedDoor(), GildedIngot.TAB);
+            GildedDoor::new, GildedIngot.TAB);
 
     public static final RegistryObject<Block> WARPED_SOUL_SOIL = registerBlock("warped_soul_soil",
-            () -> new WarpedSoulSoil(), GildedIngot.TAB);
+            WarpedSoulSoil::new, GildedIngot.TAB);
 
     public static final RegistryObject<Block> WARPED_NETHER_WART_CROP = registerBlockWithoutBlockItem("warped_nether_wart_crop",
-            () -> new WarpedNetherWartCrop());
+            WarpedNetherWartCrop::new);
 
 
     private static <T extends Block> RegistryObject<T> registerBlockWithoutBlockItem(String name, Supplier<T> block) {
