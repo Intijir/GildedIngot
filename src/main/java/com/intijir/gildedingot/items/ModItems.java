@@ -13,7 +13,7 @@ import net.minecraftforge.registries.RegistryObject;
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, GildedIngot.MOD_ID);
 
-    public static final RegistryObject<Item> GILDED_INGOT = ITEMS.register("gilded_ingot", () -> new com.intijir.gildedingot.items.GildedIngot());
+    public static final RegistryObject<Item> GILDED_INGOT = ITEMS.register("gilded_ingot", com.intijir.gildedingot.items.GildedIngot::new);
 
     public static final RegistryObject<Item> BASALT_HEART = ITEMS.register("basalt_heart",
             () -> new Item(new Item.Properties().tab(com.intijir.gildedingot.GildedIngot.TAB)));
