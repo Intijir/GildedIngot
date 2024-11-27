@@ -37,30 +37,4 @@ public class ModConfiguredFeatures {
             ResourceKey<ConfiguredFeature<?, ?>> key, F feature, FC configuration) {
         context.register(key, new ConfiguredFeature<>(feature, configuration));
     }
-
-/*
-    public static final DeferredRegister<ConfiguredFeature<?, ?>> CONFIGURED_FEATURES =
-            DeferredRegister.create(Registries.CONFIGURED_FEATURE, GildedIngot.MOD_ID);
-
-
-    // Basalt Lapis
-    public static final Supplier<List<OreConfiguration.TargetBlockState>> NETHER_BASALT_LAPIS = Suppliers.memoize(() -> List.of(
-            OreConfiguration.target(new BlockMatchTest(Blocks.BASALT), ModBlocks.BASALT_LAPIS.get().defaultBlockState())));
-
-    public static final RegistryObject<ConfiguredFeature<?, ?>> BASALT_LAPIS = CONFIGURED_FEATURES.register("basalt_lapis",
-            () -> new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(NETHER_BASALT_LAPIS.get(), 9)));
-
-
-    // Gilded Blackstone
-    public static final List<OreConfiguration.TargetBlockState> NETHER_GILDED_BLACKSTONE = List.of(
-            OreConfiguration.target(new BlockMatchTest(Blocks.NETHERRACK), Blocks.GILDED_BLACKSTONE.defaultBlockState()));
-
-    public static final RegistryObject<ConfiguredFeature<?, ?>> GILDED_BLACKSTONE = CONFIGURED_FEATURES.register("gilded_blackstone",
-            () -> new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(NETHER_GILDED_BLACKSTONE, 3)));
-
-
-    public static void register(IEventBus eventBus) {
-        CONFIGURED_FEATURES.register(eventBus);
-    }
-*/
 }
