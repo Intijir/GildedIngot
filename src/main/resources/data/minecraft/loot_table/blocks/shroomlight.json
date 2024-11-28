@@ -2,7 +2,6 @@
   "type": "minecraft:block",
   "pools": [
     {
-      "rolls": 1.0,
       "bonus_rolls": 0.0,
       "entries": [
         {
@@ -14,14 +13,16 @@
                 {
                   "condition": "minecraft:match_tool",
                   "predicate": {
-                    "enchantments": [
-                      {
-                        "enchantment": "minecraft:silk_touch",
-                        "levels": {
-                          "min": 1
+                    "predicates": {
+                      "minecraft:enchantments": [
+                        {
+                          "enchantments": "minecraft:silk_touch",
+                          "levels": {
+                            "min": 1
+                          }
                         }
-                      }
-                    ]
+                      ]
+                    }
                   }
                 }
               ],
@@ -29,35 +30,33 @@
             },
             {
               "type": "minecraft:alternatives",
-              "conditions": [
-                {
-                  "condition": "minecraft:survives_explosion"
-                }
-              ],
               "children": [
                 {
                   "type": "minecraft:item",
                   "conditions": [
                     {
-                      "condition": "minecraft:table_bonus",
-                      "enchantment": "minecraft:fortune",
                       "chances": [
                         0.1,
                         0.14285715,
                         0.25,
                         1.0
-                      ]
+                      ],
+                      "condition": "minecraft:table_bonus",
+                      "enchantment": "minecraft:fortune"
                     }
                   ],
                   "functions": [
                     {
-                      "function": "minecraft:set_count",
+                      "add": false,
                       "count": {
                         "type": "minecraft:uniform",
-                        "min": 2.0,
-                        "max": 5.0
+                        "max": 5.0,
+                        "min": 2.0
                       },
-                      "add": false
+                      "function": "minecraft:set_count"
+                    },
+                    {
+                      "function": "minecraft:explosion_decay"
                     }
                   ],
                   "name": "gildedingot:shroom_fruit"
@@ -66,11 +65,18 @@
                   "type": "minecraft:item",
                   "name": "minecraft:shroomlight"
                 }
+              ],
+              "conditions": [
+                {
+                  "condition": "minecraft:survives_explosion"
+                }
               ]
             }
           ]
         }
-      ]
+      ],
+      "rolls": 1.0
     }
-  ]
+  ],
+  "random_sequence": "minecraft:blocks/shroomlight"
 }
