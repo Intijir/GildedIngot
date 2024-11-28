@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:blasting",
-  "ingredient": {
-    "item": "minecraft:gilded_blackstone"
-  },
-  "result": "gildedingot:gilded_ingot",
-  "experience": 1,
-  "cookingtime": 20
-}

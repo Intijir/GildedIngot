@@ -4,7 +4,6 @@ import com.intijir.gildedingot.block.ModBlocks;
 import com.intijir.gildedingot.item.ModCreativeModeTabs;
 import com.intijir.gildedingot.item.ModItems;
 import com.mojang.logging.LogUtils;
-import net.minecraft.world.item.CreativeModeTabs;
 import org.slf4j.Logger;
 
 import net.neoforged.api.distmarker.Dist;

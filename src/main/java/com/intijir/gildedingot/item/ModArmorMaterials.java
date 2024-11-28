@@ -24,7 +24,7 @@ public class ModArmorMaterials {
                 attribute.put(ArmorItem.Type.LEGGINGS, 5);
                 attribute.put(ArmorItem.Type.CHESTPLATE, 7);
                 attribute.put(ArmorItem.Type.HELMET, 2);
-                attribute.put(ArmorItem.Type.BODY, 5);
+                attribute.put(ArmorItem.Type.BODY, 6);
             }), 10,0.5f, 0.1f, ModItems.GILDED_INGOT);
 
     private static Holder<ArmorMaterial> register(String name, EnumMap<ArmorItem.Type, Integer> typeProtection,

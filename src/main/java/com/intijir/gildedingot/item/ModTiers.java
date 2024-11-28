@@ -1,10 +1,7 @@
 package com.intijir.gildedingot.item;
 
 import com.intijir.gildedingot.util.ModTags;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.Tier;
-import net.minecraft.world.item.TieredItem;
-import net.minecraft.world.item.Tiers;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.neoforged.neoforge.common.SimpleTier;
 
