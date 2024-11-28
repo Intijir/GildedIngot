@@ -29,6 +29,7 @@ public class GildedIngot {
     };
 
     public static final String MOD_ID = "gildedingot";
+    public static final String MOD_NAME = "Gilded Ingot";
 
     // Directly reference a slf4j logger
     private static final Logger LOGGER = LogUtils.getLogger();
@@ -55,8 +56,7 @@ public class GildedIngot {
     }
 
     private void setup(final FMLCommonSetupEvent event) {
-        LOGGER.info("HELLO FROM PREINIT");
-        LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getName());
+        LOGGER.info("Initializing the {} Mod", MOD_NAME);
     }
 
 }
