@@ -2,10 +2,10 @@ package com.intijir.gildedingot.event;
 
 import com.intijir.gildedingot.block.ModBlocks;
 import com.intijir.gildedingot.item.ModItems;
-import net.minecraft.world.entity.monster.piglin.Piglin;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
+
 
 public class ModEvents {
 

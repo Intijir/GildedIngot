@@ -7,6 +7,10 @@ import net.minecraft.world.level.block.state.properties.BlockSetType;
 
 public class GildedDoor extends DoorBlock {
     public GildedDoor() {
-        super(Properties.copy(Blocks.IRON_BLOCK).noOcclusion().strength(1, 4.2E7F).sound(SoundType.STONE), BlockSetType.IRON);
+        super(BlockSetType.IRON,
+                Properties.ofFullCopy(Blocks.IRON_BLOCK)
+                        .noOcclusion()
+                        .strength(1, 4.2E7F)
+                        .sound(SoundType.STONE));
     }
 }

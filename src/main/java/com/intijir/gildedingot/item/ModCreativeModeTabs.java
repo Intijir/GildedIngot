@@ -6,15 +6,16 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
-public class ModCreativeModTabs {
-    public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS =
+import java.util.function.Supplier;
+
+public class ModCreativeModeTabs {
+    public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TAB =
             DeferredRegister.create(Registries.CREATIVE_MODE_TAB, GildedIngot.MOD_ID);
 
-    public static final RegistryObject<CreativeModeTab> GILDEDINGOT_TAB = CREATIVE_MODE_TABS.register("gildedingot_tab",
+    public static final Supplier<CreativeModeTab> GILDEDINGOT_TAB = CREATIVE_MODE_TAB.register("gildedingot_tab",
             () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.GILDED_INGOT.get()))
                     .title(Component.translatable("creativetab.gildedingot_tab"))
                     .displayItems((pParameters, pOutput) -> {
@@ -30,11 +31,13 @@ public class ModCreativeModTabs {
                         pOutput.accept(ModItems.SHROOM_FRUIT.get());
                         pOutput.accept(ModItems.WARPED_WART.get());
                         pOutput.accept(ModItems.GILDED_PEBBLE.get());
+                        // - Tools
                         pOutput.accept(ModItems.GILDED_SWORD.get());
                         pOutput.accept(ModItems.GILDED_PICKAXE.get());
                         pOutput.accept(ModItems.GILDED_AXE.get());
                         pOutput.accept(ModItems.GILDED_SHOVEL.get());
                         pOutput.accept(ModItems.GILDED_HOE.get());
+                        // - Armor
                         pOutput.accept(ModItems.GILDED_HELMET.get());
                         pOutput.accept(ModItems.GILDED_CHESTPLATE.get());
                         pOutput.accept(ModItems.GILDED_LEGGINGS.get());
@@ -56,6 +59,6 @@ public class ModCreativeModTabs {
 
 
     public static void register(IEventBus eventBus) {
-        CREATIVE_MODE_TABS.register(eventBus);
+        CREATIVE_MODE_TAB.register(eventBus);
     }
 }

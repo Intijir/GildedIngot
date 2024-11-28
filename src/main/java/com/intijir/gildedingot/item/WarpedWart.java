@@ -20,13 +20,13 @@ public class WarpedWart extends Item {
     }
 
     public static final FoodProperties WARPED_WART = (new FoodProperties.Builder().nutrition(4)
-            .saturationMod(1.666f)
+            .saturationModifier(1.666f)
             .effect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 200, 1), 0.4F)
-            .alwaysEat()
+            .alwaysEdible()
             .build());
 
     @Override
-    public void appendHoverText(@NotNull ItemStack pStack, @Nullable Level pLevel, @NotNull List<Component> pTooltipComponents, @NotNull TooltipFlag pIsAdvanced) {
+    public void appendHoverText(@NotNull ItemStack pStack, @NotNull TooltipContext pContext, @NotNull List<Component> pTooltipComponents, @NotNull TooltipFlag pTooltipFlag) {
         if (KeyboardHelper.isHoldingShift()){
             pTooltipComponents.add(1, Component.literal("§6"+"Gives you fire resistance for 10 seconds or 200 ticks with a probability of 40% "));
         }
@@ -34,6 +34,6 @@ public class WarpedWart extends Item {
             pTooltipComponents.add(Component.literal("§7" + "Hold " + "§e" + "Shift " + "§7" + "for more information"));
         }
 
-        super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
+        super.appendHoverText(pStack, pContext, pTooltipComponents, pTooltipFlag);
     }
 }

@@ -8,7 +8,6 @@ import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
@@ -20,13 +19,13 @@ public class ShroomFruit extends Item {
     }
 
     public static final FoodProperties SHROOM_FRUIT = (new FoodProperties.Builder().nutrition(3)
-            .saturationMod(1.666f)
+            .saturationModifier(1.666f)
             .effect(new MobEffectInstance(MobEffects.NIGHT_VISION, 300, 1), 1)
-            .alwaysEat()
+            .alwaysEdible()
             .build());
 
     @Override
-    public void appendHoverText(@NotNull ItemStack pStack, @Nullable Level pLevel, @NotNull List<Component> pTooltipComponents, @NotNull TooltipFlag pIsAdvanced) {
+    public void appendHoverText(@NotNull ItemStack pStack, @NotNull TooltipContext pContext, @NotNull List<Component> pTooltipComponents, @NotNull TooltipFlag pTooltipFlag) {
         if (KeyboardHelper.isHoldingShift()){
             pTooltipComponents.add(1, Component.literal("\u00A76" + "Gives you night vision for 15 seconds or 300 ticks"));
         }
@@ -34,6 +33,6 @@ public class ShroomFruit extends Item {
             pTooltipComponents.add(Component.literal("\u00A77" + "Hold " + "\u00A7e" + "Shift " + "\u00A77" + "for more information"));
         }
 
-        super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
+        super.appendHoverText(pStack, pContext, pTooltipComponents, pTooltipFlag);
     }
 }
