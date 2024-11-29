@@ -3,7 +3,6 @@ package com.intijir.gildedingot.items;
 import com.intijir.gildedingot.GildedIngot;
 import com.intijir.gildedingot.armor.ModArmorMaterials;
 import com.intijir.gildedingot.blocks.ModBlocks;
-import com.intijir.gildedingot.util.Registration;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.*;
 import net.minecraftforge.eventbus.api.IEventBus;

@@ -12,7 +12,7 @@ public class ModPlacedFeatures {
                     HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(50), VerticalAnchor.aboveBottom(110))));
 
     public static final Holder<PlacedFeature> GILDED_BLACKSTONE_PLACED = PlacementUtils.register("gilded_blackstone_placed",
-            ModConfiguredFeatures.GILDED_BLACKSTONE, ModOrePlacement.commonOrePlacement(2, // VeinsPerChunk
+            ModConfiguredFeatures.GILDED_BLACKSTONE, ModOrePlacement.commonOrePlacement(7, // VeinsPerChunk
                     HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(80), VerticalAnchor.aboveBottom(110))));
 
 

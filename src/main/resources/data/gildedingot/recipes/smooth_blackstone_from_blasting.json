@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "minecraft:blackstone"
+  },
+  "result": "gildedingot:smooth_blackstone",
+  "experience": 1.0,
+  "cookingtime": 80
+}

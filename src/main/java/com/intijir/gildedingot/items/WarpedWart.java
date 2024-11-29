@@ -3,7 +3,6 @@ package com.intijir.gildedingot.items;
 import com.intijir.gildedingot.GildedIngot;
 import com.intijir.gildedingot.util.KeyboardHelper;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextColor;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
