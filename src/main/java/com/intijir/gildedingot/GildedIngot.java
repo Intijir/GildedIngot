@@ -8,7 +8,6 @@ import com.intijir.gildedingot.world.feature.ModPlacedFeatures;
 import com.mojang.logging.LogUtils;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
