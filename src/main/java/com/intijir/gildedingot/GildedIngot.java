@@ -28,7 +28,7 @@ import org.apache.logging.log4j.Logger;
 @Mod("gildedingot")
 public class GildedIngot {
     public static final String MOD_ID = "gildedingot";
-    public static final ItemGroup TAB = new ItemGroup("GildedIngotMod") {
+    public static final ItemGroup TAB = new ItemGroup("GildedIngot") {
         public ItemStack makeIcon() {
             return new ItemStack((IItemProvider)ModItems.GILDED_INGOT.get());
         }
