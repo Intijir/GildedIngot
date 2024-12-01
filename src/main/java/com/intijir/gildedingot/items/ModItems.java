@@ -15,7 +15,6 @@ public class ModItems {
     public static final RegistryObject<Item> WARPED_WART;
     public static final RegistryObject<Item> GILDED_NUGGET;
     public static final RegistryObject<Item> WARPED_WART_SEED;
-    public static final RegistryObject<Item> HEART_BASALT;
     public static final RegistryObject<Item> GILDED_PILE_ITEM;
 
     public ModItems() {
@@ -31,7 +30,6 @@ public class ModItems {
         WARPED_WART = Registration.ITEMS.register("warped_wart", () -> new WarpedWart());
         GILDED_NUGGET = Registration.ITEMS.register("gilded_nugget", () -> new Item((new Item.Properties()).tab(com.intijir.gildedingot.GildedIngot.TAB)));
         WARPED_WART_SEED = Registration.ITEMS.register("warped_wart_seed", () -> new BlockItem((Block)ModBlocks.WARPED_NETHER_WART_CROP.get(), (new Item.Properties()).tab(com.intijir.gildedingot.GildedIngot.TAB)));
-        HEART_BASALT = Registration.ITEMS.register("basalt_heart", () -> new Item((new Item.Properties()).tab(com.intijir.gildedingot.GildedIngot.TAB)));
         GILDED_PILE_ITEM = Registration.ITEMS.register("gilded_pile", () -> new BlockItemBase((Block)ModBlocks.GILDED_PILE.get()));
     }
 }
