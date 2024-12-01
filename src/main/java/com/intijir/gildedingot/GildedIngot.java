@@ -1,62 +1,58 @@
+//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by FernFlower decompiler)
+//
+
 package com.intijir.gildedingot;
 
+import com.intijir.gildedingot.armor.ModArmor;
 import com.intijir.gildedingot.blocks.ModBlocks;
 import com.intijir.gildedingot.events.ModEvents;
 import com.intijir.gildedingot.items.ModItems;
-import com.mojang.logging.LogUtils;
-import net.minecraft.client.renderer.ItemBlockRenderTypes;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.Block;
+import com.intijir.gildedingot.setup.ClientProxy;
+import com.intijir.gildedingot.setup.IProxy;
+import com.intijir.gildedingot.setup.ServerProxy;
+import com.intijir.gildedingot.tools.ModTools;
+import com.intijir.gildedingot.util.Registration;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.IItemProvider;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import org.slf4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-// The value here should match an entry in the META-INF/mods.toml file
 @Mod("gildedingot")
 public class GildedIngot {
-
-    public static final CreativeModeTab TAB = new CreativeModeTab("GildedIngot") {
-        @Override
+    public static final String MOD_ID = "gildedingot";
+    public static final ItemGroup TAB = new ItemGroup("GildedIngotMod") {
         public ItemStack makeIcon() {
-            return new ItemStack(ModItems.GILDED_INGOT.get());
+            return new ItemStack((IItemProvider)ModItems.GILDED_INGOT.get());
         }
     };
-
-    public static final String MOD_ID = "gildedingot";
-    public static final String MOD_NAME = "Gilded Ingot";
-
-    // Directly reference a slf4j logger
-    private static final Logger LOGGER = LogUtils.getLogger();
+    public static IProxy proxy;
+    public static final Logger LOGGER = LogManager.getLogger();
 
     public GildedIngot() {
-
-        IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
-
-        ModItems.register(eventBus);
-        ModBlocks.register(eventBus);
-
-        eventBus.addListener(this::setup);
-        eventBus.addListener(this::clientSetup);
-
-        MinecraftForge.EVENT_BUS.register(new ModEvents());
-
+        proxy = (IProxy)DistExecutor.safeRunForDist(() -> ClientProxy::new, () -> ServerProxy::new);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
+        this.registerModAdditions();
         MinecraftForge.EVENT_BUS.register(this);
     }
 
-    private void clientSetup(final FMLClientSetupEvent event){
-        ItemBlockRenderTypes.setRenderLayer((Block)ModBlocks.WARPED_NETHER_WART_CROP.get(), RenderType.translucent());
-        ItemBlockRenderTypes.setRenderLayer((Block)ModBlocks.GILDED_GLASS.get(), RenderType.translucent());
-        ItemBlockRenderTypes.setRenderLayer((Block)ModBlocks.GILDED_DOOR.get(), RenderType.translucent());
+    private void setup(FMLCommonSetupEvent event) {
+        proxy.init();
     }
 
-    private void setup(final FMLCommonSetupEvent event) {
-        LOGGER.info("Initializing the {} Mod", MOD_NAME);
+    private void registerModAdditions() {
+        Registration.init();
+        ModItems.register();
+        ModBlocks.register();
+        ModTools.register();
+        ModArmor.register();
+        MinecraftForge.EVENT_BUS.register(new ModEvents());
     }
-
 }

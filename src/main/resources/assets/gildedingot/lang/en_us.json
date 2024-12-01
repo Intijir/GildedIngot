@@ -1,6 +1,6 @@
 {
   "item.gildedingot.gilded_ingot": "Gilded Ingot",
-  "itemGroup.GildedIngot": "Gilded Ingot",
+  "itemGroup.GildedIngotMod": "Gilded Ingot Mod",
   "block.gildedingot.gilded_block": "Block of Gilded Ingot",
   "block.gildedingot.gilded_bricks": "Gilded Bricks",
   "item.gildedingot.gilded_sword": "Gilded Sword",
@@ -25,8 +25,6 @@
   "block.gildedingot.warped_soul_soil": "Warped Soul Soil",
   "block.gildedingot.gilded_door": "Gilded Door",
   "block.gildedingot.gilded_glowshroom": "Gilded Glowshroom",
-  "item.gildedingot.basalt_heart": "Basalt Heart",
-  "item.gildedingot.crimson_heart": "Crimson Heart",
-  "item.gildedingot.soul_heart": "Soul Heart",
-  "item.gildedingot.warped_heart": "Warped Heart"
+  "item.gildedingot.heart_basalt": "Heart of the nether",
+  "block.gildedingot.blaze_furnace": "Blaze furnace"
 }

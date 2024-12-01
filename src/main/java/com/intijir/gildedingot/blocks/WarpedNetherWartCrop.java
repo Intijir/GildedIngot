@@ -1,68 +1,42 @@
 package com.intijir.gildedingot.blocks;
 
 import com.intijir.gildedingot.items.ModItems;
-import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.ItemLike;
-import net.minecraft.world.level.block.BeetrootBlock;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.IntegerProperty;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.VoxelShape;
-
-import java.util.Random;
+import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.BeetrootBlock;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.util.IItemProvider;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.shapes.ISelectionContext;
+import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.world.IBlockReader;
 
 public class WarpedNetherWartCrop extends BeetrootBlock {
-    public WarpedNetherWartCrop() {
-        super(Properties.copy(Blocks.NETHER_WART));
+    private static final VoxelShape[] SHAPES =
+            new VoxelShape[] {
+                    Block.box((double)0.0F, (double)0.0F, (double)0.0F, (double)16.0F, (double)2.0F, (double)16.0F),
+                    Block.box((double)0.0F, (double)0.0F, (double)0.0F, (double)16.0F, (double)4.0F, (double)16.0F),
+                    Block.box((double)0.0F, (double)0.0F, (double)0.0F, (double)16.0F, (double)6.0F, (double)16.0F),
+                    Block.box((double)0.0F, (double)0.0F, (double)0.0F, (double)16.0F, (double)8.0F, (double)16.0F),
+                    Block.box((double)0.0F, (double)0.0F, (double)0.0F, (double)16.0F, (double)10.0F, (double)16.0F),
+                    Block.box((double)0.0F, (double)0.0F, (double)0.0F, (double)16.0F, (double)12.0F, (double)16.0F),
+                    Block.box((double)0.0F, (double)0.0F, (double)0.0F, (double)16.0F, (double)14.0F, (double)16.0F),
+                    Block.box((double)0.0F, (double)0.0F, (double)0.0F, (double)16.0F, (double)16.0F, (double)16.0F)
+    };
+
+    public WarpedNetherWartCrop(AbstractBlock.Properties builder) {
+        super(builder);
     }
 
-    public static final int MAX_AGE = 3;
-    public static final IntegerProperty AGE = BlockStateProperties.AGE_3;
-    private static final VoxelShape[] SHAPE_BY_AGE = new VoxelShape[]{Block.box(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 4.0D, 16.0D), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 6.0D, 16.0D), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D)};
-
-    public IntegerProperty getAgeProperty() {
-        return AGE;
+    protected IItemProvider getBaseSeedId() {
+        return (IItemProvider)ModItems.WARPED_WART_SEED.get();
     }
 
-    public int getMaxAge() {
-        return 3;
+    public VoxelShape getShape(BlockState state, IBlockReader blockReader, BlockPos blockPos, ISelectionContext selectionContext) {
+        return SHAPES[(Integer)state.getValue(this.getAgeProperty())];
     }
 
-    protected ItemLike getBaseSeedId() {
-        return ModItems.WARPED_WART_SEED.get();
-    }
-
-    /**
-     * Performs a random tick on a block.
-     */
-    public void randomTick(BlockState pState, ServerLevel pLevel, BlockPos pPos, Random pRandom) {
-        if (pRandom.nextInt(3) != 0) {
-            super.randomTick(pState, pLevel, pPos, pRandom);
-        }
-
-    }
-
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
-        pBuilder.add(AGE);
-    }
-
-    public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
-        return SHAPE_BY_AGE[pState.getValue(this.getAgeProperty())];
-    }
-
-    @Override
-    protected boolean mayPlaceOn(BlockState pState, BlockGetter pLevel, BlockPos pPos) {
-        return pState.is(ModBlocks.WARPED_SOUL_SOIL.get());
-    }
-
-    @Override
-    public boolean isValidBonemealTarget(BlockGetter pLevel, BlockPos pPos, BlockState pState, boolean pIsClient) {
-        return false;
+    protected boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
+        return state.is((Block)ModBlocks.WARPED_SOUL_SOIL.get());
     }
 }

@@ -12,8 +12,10 @@
               "type": "minecraft:item",
               "conditions": [
                 {
-                  "condition": "forge:can_tool_perform_action",
-                  "action": "shears_dig"
+                  "condition": "minecraft:match_tool",
+                  "predicate": {
+                    "item": "minecraft:shears"
+                  }
                 }
               ],
               "name": "minecraft:warped_roots"

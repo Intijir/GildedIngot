@@ -2,14 +2,9 @@ package com.intijir.gildedingot.items;
 
 import com.intijir.gildedingot.GildedIngot;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 
-public class GildedPebble extends Item {
-    public GildedPebble() {
+public class ItemBase extends Item {
+    public ItemBase() {
         super((new Item.Properties()).tab(GildedIngot.TAB));
-    }
-
-    public int getBurnTime(ItemStack itemStack) {
-        return 4800;
     }
 }

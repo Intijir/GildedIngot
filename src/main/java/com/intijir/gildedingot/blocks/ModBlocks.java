@@ -1,83 +1,55 @@
 package com.intijir.gildedingot.blocks;
 
 import com.intijir.gildedingot.GildedIngot;
-import com.intijir.gildedingot.items.ModItems;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.Material;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
-
+import com.intijir.gildedingot.util.Registration;
 import java.util.function.Supplier;
+import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.FurnaceBlock;
+import net.minecraft.block.GlassBlock;
+import net.minecraft.block.SnowBlock;
+import net.minecraft.block.SoundType;
+import net.minecraft.block.AbstractBlock.Properties;
+import net.minecraft.block.material.Material;
+import net.minecraft.item.BlockItem;
+import net.minecraft.item.Item;
+import net.minecraftforge.common.ToolType;
+import net.minecraftforge.fml.RegistryObject;
 
 public class ModBlocks {
-    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, GildedIngot.MOD_ID);
+    public static final RegistryObject<Block> GILDED_BLOCK = register("gilded_block", () -> new Block(Properties.of(Material.METAL).strength(10.0F, 15.0F).harvestLevel(2).harvestTool(ToolType.PICKAXE).sound(SoundType.METAL)));
+    public static final RegistryObject<Block> GILDED_BRICKS = register("gilded_bricks", () -> new Block(Properties.of(Material.CLAY).strength(3.0F, 30.0F).harvestLevel(1).harvestTool(ToolType.PICKAXE).sound(SoundType.NETHER_BRICKS)));
+    public static final RegistryObject<Block> BLUE_NETHER_BRICKS = register("blue_nether_bricks", () -> new Block(Properties.of(Material.CLAY).strength(10.0F, 10.0F).harvestLevel(1).harvestTool(ToolType.PICKAXE).sound(SoundType.NETHER_BRICKS)));
+    public static final RegistryObject<Block> SMOOTH_BLACKSTONE_BLOCK = register("smooth_blackstone", () -> new Block(Properties.of(Material.STONE).strength(2.0F, 7.0F).harvestLevel(0).harvestTool(ToolType.PICKAXE).sound(SoundType.STONE)));
+    public static final RegistryObject<SnowBlock> GILDED_PILE;
+    public static final RegistryObject<Block> WARPED_NETHER_WART_CROP;
+    public static final RegistryObject<Block> BASALT_LAPIS;
+    public static final RegistryObject<FurnaceBlock> BLAZE_FURNACE;
+    public static final RegistryObject<GlassBlock> GILDED_GLASS;
+    public static final RegistryObject<Block> GILDED_GLOWSHROOM;
+    public static final RegistryObject<Block> WARPED_SOUL_SOIL;
+    public static final RegistryObject<Block> GILDED_DOOR;
 
-    public static final RegistryObject<Block> GILDED_BLOCK = registerBlock("gilded_block",
-            () -> new Block(BlockBehaviour.Properties.of(Material.METAL).strength(10, 15000000)
-            .requiresCorrectToolForDrops().sound(SoundType.METAL)), GildedIngot.TAB);
-
-    public static final RegistryObject<Block> GILDED_BRICKS = registerBlock("gilded_bricks",
-            () -> new Block(BlockBehaviour.Properties.of(Material.CLAY).strength(3, 30000000)
-            .requiresCorrectToolForDrops().sound(SoundType.NETHER_BRICKS)), GildedIngot.TAB);
-
-    public static final RegistryObject<Block> BLUE_NETHER_BRICKS = registerBlock("blue_nether_bricks",
-            () -> new Block(BlockBehaviour.Properties.of(Material.CLAY).strength(10, 10)
-                    .requiresCorrectToolForDrops().sound(SoundType.NETHER_BRICKS)), GildedIngot.TAB);
-
-    public static final RegistryObject<Block> SMOOTH_BLACKSTONE = registerBlock("smooth_blackstone",
-            () -> new Block(BlockBehaviour.Properties.of(Material.CLAY).strength(2, 7)
-                    .requiresCorrectToolForDrops().sound(SoundType.STONE)), GildedIngot.TAB);
-
-    public static final RegistryObject<Block> GILDED_PILE = registerBlock("gilded_pile",
-            GildedPile::new, GildedIngot.TAB);
-
-    public static final RegistryObject<Block> BASALT_LAPIS = registerBlock("basalt_lapis",
-            () -> new Block(BlockBehaviour.Properties.of(Material.STONE).strength(1.25F, 4.2F)
-                    .requiresCorrectToolForDrops().sound(SoundType.BASALT)), GildedIngot.TAB);
-
-    public static final RegistryObject<Block> GILDED_GLASS = registerBlock("gilded_glass",
-            () -> new Block(BlockBehaviour.Properties.of(Material.GLASS).strength(0.3F, 0.3F)
-                    .sound(SoundType.GLASS).noOcclusion()), GildedIngot.TAB);
-
-    public static final RegistryObject<Block> GILDED_GLOWSHROOM = registerBlock("gilded_glowshroom",
-            () -> new Block(BlockBehaviour.Properties.of(Material.CLAY).strength(1)
-                    .requiresCorrectToolForDrops().sound(SoundType.SHROOMLIGHT).lightLevel(state -> {return 15;})), GildedIngot.TAB);
-
-    public static final RegistryObject<Block> GILDED_DOOR = registerBlock("gilded_door",
-            GildedDoor::new, GildedIngot.TAB);
-
-    public static final RegistryObject<Block> WARPED_SOUL_SOIL = registerBlock("warped_soul_soil",
-            WarpedSoulSoil::new, GildedIngot.TAB);
-
-    public static final RegistryObject<Block> WARPED_NETHER_WART_CROP = registerBlockWithoutBlockItem("warped_nether_wart_crop",
-            WarpedNetherWartCrop::new);
-
-
-    private static <T extends Block> RegistryObject<T> registerBlockWithoutBlockItem(String name, Supplier<T> block) {
-        return BLOCKS.register(name, block);
+    public ModBlocks() {
     }
 
-    private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block, CreativeModeTab tab) {
-        RegistryObject<T> toReturn = BLOCKS.register(name, block);
-        registerBlockItem(name, toReturn, tab);
+    public static void register() {
+    }
+
+    private static <T extends Block> RegistryObject<T> register(String name, Supplier<T> block) {
+        RegistryObject<T> toReturn = Registration.BLOCKS.register(name, block);
+        Registration.ITEMS.register(name, () -> new BlockItem((Block)toReturn.get(), (new Item.Properties()).tab(GildedIngot.TAB)));
         return toReturn;
     }
 
-    private static <T extends Block> RegistryObject<Item> registerBlockItem(String name, RegistryObject<T> block,
-                                                                            CreativeModeTab tab) {
-        return ModItems.ITEMS.register(name, () -> new BlockItem(block.get(),
-                new Item.Properties().tab(tab)));
+    static {
+        GILDED_PILE = Registration.BLOCKS.register("gilded_pile", () -> new GildedPile());
+        WARPED_NETHER_WART_CROP = Registration.BLOCKS.register("warped_nether_wart_crop", () -> new WarpedNetherWartCrop(Properties.copy(Blocks.NETHER_WART)));
+        BASALT_LAPIS = register("basalt_lapis", () -> new Block(Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(1.25F, 4.2F).harvestLevel(1).harvestTool(ToolType.PICKAXE).sound(SoundType.BASALT)));
+        BLAZE_FURNACE = register("blaze_furnace", () -> new FurnaceBlock(Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(2.0F, 5.0F).harvestLevel(3).harvestTool(ToolType.PICKAXE).sound(SoundType.STONE)));
+        GILDED_GLASS = register("gilded_glass", () -> new GlassBlock(Properties.of(Material.GLASS).requiresCorrectToolForDrops().strength(0.3F, 0.3F).harvestLevel(0).sound(SoundType.GLASS).noOcclusion()));
+        GILDED_GLOWSHROOM = register("gilded_glowshroom", () -> new Block(Properties.of(Material.CLAY).strength(1.0F).harvestTool(ToolType.HOE).sound(SoundType.SHROOMLIGHT).noOcclusion().lightLevel((state) -> 15)));
+        WARPED_SOUL_SOIL = register("warped_soul_soil", () -> new WarpedSoulSoil());
+        GILDED_DOOR = register("gilded_door", () -> new GildedDoor());
     }
-
-    public static void register(IEventBus eventBus) {
-        BLOCKS.register(eventBus);
-    }
-
 }

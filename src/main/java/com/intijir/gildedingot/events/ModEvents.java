@@ -2,7 +2,7 @@ package com.intijir.gildedingot.events;
 
 import com.intijir.gildedingot.blocks.ModBlocks;
 import com.intijir.gildedingot.items.ModItems;
-import net.minecraft.world.level.block.Blocks;
+import net.minecraft.block.Blocks;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 

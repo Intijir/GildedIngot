@@ -1,123 +1,114 @@
 package com.intijir.gildedingot.blocks;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.tags.FluidTags;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.FenceGateBlock;
-import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.block.piston.MovingPistonBlock;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.IntegerProperty;
-import net.minecraft.world.level.material.Material;
-import net.minecraft.world.level.pathfinder.PathComputationType;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.VoxelShape;
-
 import java.util.Random;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
+import net.minecraft.entity.Entity;
+import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.pathfinding.PathType;
+import net.minecraft.state.IntegerProperty;
+import net.minecraft.state.Property;
+import net.minecraft.state.StateContainer;
+import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.tags.FluidTags;
+import net.minecraft.util.Direction;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockReader;
+import net.minecraft.world.IWorld;
+import net.minecraft.world.IWorldReader;
+import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.common.FarmlandWaterManager;
+import net.minecraftforge.common.ForgeHooks;
+import net.minecraftforge.common.IPlantable;
+import net.minecraftforge.common.ToolType;
 
 public class WarpedSoulSoil extends Block {
-    public static final IntegerProperty MOISTURE = BlockStateProperties.MOISTURE;
-    protected static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 15.0D, 16.0D);
-    public static final int MAX_MOISTURE = 7;
+    public static final IntegerProperty MOISTURE;
 
     public WarpedSoulSoil() {
-        super(Properties.of(Material.SAND).strength(0.5f, 0.5f).sound(SoundType.SAND));
-        this.registerDefaultState(this.stateDefinition.any().setValue(MOISTURE, Integer.valueOf(0)));
+        super(Properties.of(Material.SAND).strength(0.5F, 0.5F)
+                .harvestLevel(1).harvestTool(ToolType.SHOVEL).sound(SoundType.SAND));
     }
 
-    public BlockState updateShape(BlockState pState, Direction pFacing, BlockState pFacingState, LevelAccessor pLevel, BlockPos pCurrentPos, BlockPos pFacingPos) {
-        if (pFacing == Direction.UP && !pState.canSurvive(pLevel, pCurrentPos)) {
-            pLevel.scheduleTick(pCurrentPos, this, 1);
+    public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
+        if (facing == Direction.UP && !stateIn.canSurvive(worldIn, currentPos)) {
+            worldIn.getBlockTicks().scheduleTick(currentPos, this, 1);
         }
-
-        return super.updateShape(pState, pFacing, pFacingState, pLevel, pCurrentPos, pFacingPos);
+        return super.updateShape(stateIn, facing, facingState, worldIn, currentPos, facingPos);
     }
 
-    public boolean canSurvive(BlockState pState, LevelReader pLevel, BlockPos pPos) {
-        BlockState blockstate = pLevel.getBlockState(pPos.above());
-        return !blockstate.getMaterial().isSolid() || blockstate.getBlock() instanceof FenceGateBlock || blockstate.getBlock() instanceof MovingPistonBlock;
-    }
-
-    public BlockState getStateForPlacement(BlockPlaceContext pContext) {
-        return !this.defaultBlockState().canSurvive(pContext.getLevel(), pContext.getClickedPos()) ? Blocks.SOUL_SOIL.defaultBlockState() : super.getStateForPlacement(pContext);
+    public BlockState getStateForPlacement(BlockItemUseContext context) {
+        return !this.defaultBlockState().canSurvive(context.getLevel(), context.getClickedPos()) ? Blocks.SOUL_SOIL.defaultBlockState() : super.getStateForPlacement(context);
     }
 
     public boolean useShapeForLightOcclusion(BlockState pState) {
         return true;
     }
 
-    public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
-        return SHAPE;
-    }
-
-    public void tick(BlockState pState, ServerLevel pLevel, BlockPos pPos, Random pRand) {
-        if (!pState.canSurvive(pLevel, pPos)) {
-            turnToDirt(pState, pLevel, pPos);
+    public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand) {
+        if (!state.canSurvive(worldIn, pos)) {
+            turnToSoulSoil(state, worldIn, pos);
         }
-
     }
 
     /**
      * Performs a random tick on a block.
      */
-    public void randomTick(BlockState pState, ServerLevel pLevel, BlockPos pPos, Random pRandom) {
-        int i = pState.getValue(MOISTURE);
-        if (!isNearWater(pLevel, pPos) && !pLevel.isRainingAt(pPos.above())) {
+    public void randomTick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
+        int i = (Integer)state.getValue(MOISTURE);
+        if (!isNearWater(worldIn, pos) && !worldIn.isRainingAt(pos.above())) {
             if (i > 0) {
-                pLevel.setBlock(pPos, pState.setValue(MOISTURE, Integer.valueOf(i - 1)), 2);
-            } else if (!isUnderCrops(pLevel, pPos)) {
-                turnToDirt(pState, pLevel, pPos);
+                worldIn.setBlock(pos, (BlockState)state.setValue(MOISTURE, i - 1), 2);
+            } else if (!this.hasCrops(worldIn, pos)) {
+                turnToSoulSoil(state, worldIn, pos);
             }
         } else if (i < 7) {
-            pLevel.setBlock(pPos, pState.setValue(MOISTURE, Integer.valueOf(7)), 2);
+            worldIn.setBlock(pos, (BlockState)state.setValue(MOISTURE, 7), 2);
         }
 
     }
 
-    public void fallOn(Level p_153227_, BlockState p_153228_, BlockPos p_153229_, Entity p_153230_, float p_153231_) {
-        if (!p_153227_.isClientSide && net.minecraftforge.common.ForgeHooks.onFarmlandTrample(p_153227_, p_153229_, Blocks.SOUL_SOIL.defaultBlockState(), p_153231_, p_153230_)) { // Forge: Move logic to Entity#canTrample
-            turnToDirt(p_153228_, p_153227_, p_153229_);
+    public void fallOn(World worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
+        if (!worldIn.isClientSide && ForgeHooks.onFarmlandTrample(worldIn, pos, Blocks.SOUL_SOIL.defaultBlockState(), fallDistance, entityIn)) {
+            turnToSoulSoil(worldIn.getBlockState(pos), worldIn, pos);
         }
 
-        super.fallOn(p_153227_, p_153228_, p_153229_, p_153230_, p_153231_);
+        super.fallOn(worldIn, pos, entityIn, fallDistance);
     }
 
-    public static void turnToDirt(BlockState pState, Level pLevel, BlockPos pPos) {
-        pLevel.setBlockAndUpdate(pPos, pushEntitiesUp(pState, Blocks.SOUL_SOIL.defaultBlockState(), pLevel, pPos));
+    public static void turnToSoulSoil(BlockState state, World worldIn, BlockPos pos) {
+        worldIn.setBlockAndUpdate(pos, pushEntitiesUp(state, Blocks.SOUL_SOIL.defaultBlockState(), worldIn, pos));
     }
 
-    private static boolean isUnderCrops(BlockGetter pLevel, BlockPos pPos) {
-        BlockState plant = pLevel.getBlockState(pPos.above());
-        BlockState state = pLevel.getBlockState(pPos);
-        return plant.getBlock() instanceof net.minecraftforge.common.IPlantable && state.canSustainPlant(pLevel, pPos, Direction.UP, (net.minecraftforge.common.IPlantable)plant.getBlock());
+    private boolean hasCrops(IBlockReader worldIn, BlockPos pos) {
+        BlockState plant = worldIn.getBlockState(pos.above());
+        BlockState state = worldIn.getBlockState(pos);
+        return plant.getBlock() instanceof IPlantable && state.canSustainPlant(worldIn, pos, Direction.UP, (IPlantable)plant.getBlock());
     }
 
-    private static boolean isNearWater(LevelReader pLevel, BlockPos pPos) {
-        for(BlockPos blockpos : BlockPos.betweenClosed(pPos.offset(-4, 0, -4), pPos.offset(4, 1, 4))) {
-            if (pLevel.getFluidState(blockpos).is(FluidTags.LAVA)) {
+    // isNearWater
+    private static boolean isNearWater(IWorldReader worldIn, BlockPos pos) {
+        for(BlockPos blockpos : BlockPos.betweenClosed(pos.offset(-4, 0, -4), pos.offset(4, 1, 4))) {
+            if (worldIn.getFluidState(blockpos).is(FluidTags.LAVA)) {
                 return true;
             }
         }
-
-        return net.minecraftforge.common.FarmlandWaterManager.hasBlockWaterTicket(pLevel, pPos);
+        return FarmlandWaterManager.hasBlockWaterTicket(worldIn, pos);
     }
 
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
-        pBuilder.add(MOISTURE);
+    protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
+        builder.add(new Property[]{MOISTURE});
     }
 
-    public boolean isPathfindable(BlockState pState, BlockGetter pLevel, BlockPos pPos, PathComputationType pType) {
+    public boolean isPathfindable(BlockState state, IBlockReader worldIn, BlockPos pos, PathType type) {
         return false;
+    }
+
+    static {
+        MOISTURE = BlockStateProperties.MOISTURE;
     }
 }

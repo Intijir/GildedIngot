@@ -1,74 +1,81 @@
 package com.intijir.gildedingot.armor;
 
-import com.intijir.gildedingot.GildedIngot;
 import com.intijir.gildedingot.items.ModItems;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.util.LazyLoadedValue;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.item.ArmorMaterial;
-import net.minecraft.world.item.crafting.Ingredient;
-
 import java.util.function.Supplier;
+import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.IArmorMaterial;
+import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.util.IItemProvider;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.SoundEvents;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
-public enum ModArmorMaterials implements ArmorMaterial {
-    GILDED("gilded", 16, new int[]{2, 5, 7, 2}, 10, SoundEvents.ARMOR_EQUIP_DIAMOND, 0.5F, 0.1F, () -> {
-        return Ingredient.of(ModItems.GILDED_INGOT.get());
-    });
+public enum ModArmorMaterials implements IArmorMaterial {
+    GILDED("gildedingot:gilded", 16, new int[]{2, 5, 7, 2}, 
+            10, SoundEvents.ARMOR_EQUIP_DIAMOND, 0.5F, 
+            () -> Ingredient.of(new IItemProvider[]{(IItemProvider)ModItems.GILDED_INGOT.get()}), 0.1F);
 
-    private static final int[] HEALTH_PER_SLOT = new int[]{13, 15, 16, 11};
+    private static final int[] MAX_DAMAGE_ARRAY = new int[]{11, 16, 15, 13};
     private final String name;
-    private final int durabilityMultiplier;
-    private final int[] slotProtections;
-    private final int enchantmentValue;
-    private final SoundEvent sound;
+    private final int maxDamageFactor;
+    private final int[] damageReductionAmountArray;
+    private final int enchantability;
+    private final SoundEvent soundEvent;
     private final float toughness;
+    private final Supplier<Ingredient> repairMaterial;
     private final float knockbackResistance;
-    private final LazyLoadedValue<Ingredient> repairIngredient;
 
-    ModArmorMaterials(String p_40474_, int p_40475_, int[] p_40476_, int p_40477_, SoundEvent p_40478_, float p_40479_, float p_40480_, Supplier<Ingredient> p_40481_) {
-        this.name = p_40474_;
-        this.durabilityMultiplier = p_40475_;
-        this.slotProtections = p_40476_;
-        this.enchantmentValue = p_40477_;
-        this.sound = p_40478_;
-        this.toughness = p_40479_;
-        this.knockbackResistance = p_40480_;
-        this.repairIngredient = new LazyLoadedValue<>(p_40481_);
+    private ModArmorMaterials(String name, int maxDamageFactor, int[] damageReductionAmountArray, int enchantability, SoundEvent soundEvent, float toughness, Supplier<Ingredient> repairMaterial, float knockbackResistance) {
+        this.name = name;
+        this.maxDamageFactor = maxDamageFactor;
+        this.enchantability = enchantability;
+        this.soundEvent = soundEvent;
+        this.toughness = toughness;
+        this.repairMaterial = repairMaterial;
+        this.damageReductionAmountArray = damageReductionAmountArray;
+        this.knockbackResistance = knockbackResistance;
     }
 
-    public int getDurabilityForSlot(EquipmentSlot pSlot) {
-        return HEALTH_PER_SLOT[pSlot.getIndex()] * this.durabilityMultiplier;
+    @Override
+    public int getDurabilityForSlot(EquipmentSlotType equipmentSlotType) {
+        return MAX_DAMAGE_ARRAY[equipmentSlotType.getIndex()] * this.maxDamageFactor;
     }
 
-    public int getDefenseForSlot(EquipmentSlot pSlot) {
-        return this.slotProtections[pSlot.getIndex()];
+    @Override
+    public int getDefenseForSlot(EquipmentSlotType equipmentSlotType) {
+            return this.damageReductionAmountArray[equipmentSlotType.getIndex()];
     }
 
+    @Override
     public int getEnchantmentValue() {
-        return this.enchantmentValue;
+        return this.enchantability;
     }
 
+    @Override
     public SoundEvent getEquipSound() {
-        return this.sound;
+        return this.soundEvent;
     }
 
+    @Override
     public Ingredient getRepairIngredient() {
-        return this.repairIngredient.get();
+        return (Ingredient)this.repairMaterial.get();
     }
 
+    @OnlyIn(Dist.CLIENT)
+    @Override
     public String getName() {
-        return GildedIngot.MOD_ID + ":" + this.name;
+        return this.name;
     }
 
+    @Override
     public float getToughness() {
         return this.toughness;
     }
 
-    /**
-     * Gets the percentage of knockback resistance provided by armor of the material.
-     */
+    @Override
     public float getKnockbackResistance() {
         return this.knockbackResistance;
     }
 }
+
