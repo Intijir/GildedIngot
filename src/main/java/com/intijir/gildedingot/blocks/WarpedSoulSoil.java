@@ -60,7 +60,7 @@ public class WarpedSoulSoil extends Block {
      */
     public void randomTick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
         int i = (Integer)state.getValue(MOISTURE);
-        if (!isNearWater(worldIn, pos) && !worldIn.isRainingAt(pos.above())) {
+        if (!isNearLava(worldIn, pos) && !worldIn.isRainingAt(pos.above())) {
             if (i > 0) {
                 worldIn.setBlock(pos, (BlockState)state.setValue(MOISTURE, i - 1), 2);
             } else if (!this.hasCrops(worldIn, pos)) {
@@ -91,7 +91,7 @@ public class WarpedSoulSoil extends Block {
     }
 
     // isNearWater
-    private static boolean isNearWater(IWorldReader worldIn, BlockPos pos) {
+    private static boolean isNearLava(IWorldReader worldIn, BlockPos pos) {
         for(BlockPos blockpos : BlockPos.betweenClosed(pos.offset(-4, 0, -4), pos.offset(4, 1, 4))) {
             if (worldIn.getFluidState(blockpos).is(FluidTags.LAVA)) {
                 return true;

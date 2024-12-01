@@ -36,7 +36,8 @@ public class WarpedNetherWartCrop extends BeetrootBlock {
         return SHAPES[(Integer)state.getValue(this.getAgeProperty())];
     }
 
-    protected boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
+    protected boolean mayPlaceOn(BlockState state, IBlockReader worldIn, BlockPos pos) {
         return state.is((Block)ModBlocks.WARPED_SOUL_SOIL.get());
     }
 }
+
