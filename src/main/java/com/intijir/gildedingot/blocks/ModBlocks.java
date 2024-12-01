@@ -47,7 +47,7 @@ public class ModBlocks {
         WARPED_NETHER_WART_CROP = Registration.BLOCKS.register("warped_nether_wart_crop", () -> new WarpedNetherWartCrop(Properties.copy(Blocks.NETHER_WART)));
         BASALT_LAPIS = register("basalt_lapis", () -> new Block(Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(1.25F, 4.2F).harvestLevel(1).harvestTool(ToolType.PICKAXE).sound(SoundType.BASALT)));
         BLAZE_FURNACE = register("blaze_furnace", () -> new FurnaceBlock(Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(2.0F, 5.0F).harvestLevel(3).harvestTool(ToolType.PICKAXE).sound(SoundType.STONE)));
-        GILDED_GLASS = register("gilded_glass", () -> new GlassBlock(Properties.of(Material.GLASS).requiresCorrectToolForDrops().strength(0.3F, 0.3F).harvestLevel(0).sound(SoundType.GLASS).noOcclusion()));
+        GILDED_GLASS = register("gilded_glass", () -> new GlassBlock(Properties.of(Material.GLASS).strength(0.3F, 0.3F).harvestLevel(0).sound(SoundType.GLASS).noOcclusion()));
         GILDED_GLOWSHROOM = register("gilded_glowshroom", () -> new Block(Properties.of(Material.CLAY).strength(1.0F).harvestTool(ToolType.HOE).sound(SoundType.SHROOMLIGHT).noOcclusion().lightLevel((state) -> 15)));
         WARPED_SOUL_SOIL = register("warped_soul_soil", () -> new WarpedSoulSoil());
         GILDED_DOOR = register("gilded_door", () -> new GildedDoor());

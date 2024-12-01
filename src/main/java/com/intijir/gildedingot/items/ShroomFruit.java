@@ -26,9 +26,9 @@ public class ShroomFruit extends Item {
 
     public void appendHoverText(ItemStack stack, World world, List<ITextComponent> tooltip, ITooltipFlag flag) {
         if (KeyboardHelper.isHoldingShift()) {
-            tooltip.add(new StringTextComponent("\u001b[34mGives you night vision for 15 seconds or 300 ticks"));
+            tooltip.add(new StringTextComponent("\u00A76"+"Gives you night vision for 15 seconds or 300 ticks"));
         } else {
-            tooltip.add(new StringTextComponent("Hold §eShift §7for more information"));
+            tooltip.add(new StringTextComponent("\u00A77" + "Hold " + "\u00A7e" + "Shift " + "\u00A77" + "for more information"));
         }
 
         super.appendHoverText(stack, world, tooltip, flag);

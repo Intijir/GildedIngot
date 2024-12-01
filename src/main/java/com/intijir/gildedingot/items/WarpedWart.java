@@ -25,9 +25,9 @@ public class WarpedWart extends Item {
 
     public void appendHoverText(ItemStack stack, World world, List<ITextComponent> tooltip, ITooltipFlag flag) {
         if (KeyboardHelper.isHoldingShift()) {
-            tooltip.add(new StringTextComponent("\u001b[34mGives you fire resistance for 10 seconds or 200 ticks with a probability of 40% "));
+            tooltip.add(new StringTextComponent("\u00A76"+"Gives you fire resistance for 10 seconds or 200 ticks with a probability of 40% "));
         } else {
-            tooltip.add(new StringTextComponent("Hold §eShift §7for more information"));
+            tooltip.add(new StringTextComponent("\u00A77" + "Hold " + "\u00A7e" + "Shift " + "\u00A77" + "for more information"));
         }
 
         super.appendHoverText(stack, world, tooltip, flag);
