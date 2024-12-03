@@ -31,11 +31,9 @@ logoFile="GildedIngot.png" #optional
 # A text field displayed in the mod UI
 #credits="Thanks for this example mod goes to Java" #optional
 # A text field displayed in the mod UI
-authors="Intijir, Maurisio" #optional
+authors="Intijir, Maurisio, MC Mods Pete" #optional
 # The description text for the mod (multi line!) (#mandatory)
-description='''
-A mod that adds stuff to the nether and gives gilded blackstone a use
-'''
+description="This mod gives Gilded Blackstone a use (armor, Items, Blocks...), it also adds other small features to the nether."
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
 [[dependencies.gildedingot]] #optional
    # the modid of the dependency
