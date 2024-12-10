@@ -1,39 +1,38 @@
 package com.intijir.gildedingot.item;
 
 import com.intijir.gildedingot.util.KeyboardHelper;
-import net.minecraft.network.chat.Component;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.level.Level;
-import org.jetbrains.annotations.NotNull;
+import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.minecraft.client.item.TooltipContext;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.item.FoodComponent;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.text.Text;
+import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
 import java.util.List;
 
 public class WarpedWart extends Item {
     public WarpedWart() {
-        super(new Properties().food(WARPED_WART));
+        super(new FabricItemSettings().food(WARPED_WART));
     }
 
-    public static final FoodProperties WARPED_WART = (new FoodProperties.Builder().nutrition(4)
-            .saturationMod(1.666f)
-            .effect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 200, 1), 0.4F)
-            .alwaysEat()
+    public static final FoodComponent WARPED_WART = (new FoodComponent.Builder().hunger(4)
+            .saturationModifier(1.666f)
+            .statusEffect(new StatusEffectInstance(StatusEffects.FIRE_RESISTANCE, 200, 1), 0.4F)
+            .alwaysEdible()
             .build());
 
     @Override
-    public void appendHoverText(@NotNull ItemStack pStack, @Nullable Level pLevel, @NotNull List<Component> pTooltipComponents, @NotNull TooltipFlag pIsAdvanced) {
+    public void appendTooltip(ItemStack pStack, @Nullable World pWorld, List<Text> tooltip, TooltipContext ctx) {
         if (KeyboardHelper.isHoldingShift()){
-            pTooltipComponents.add(1, Component.literal("§6"+"Gives you fire resistance for 10 seconds or 200 ticks with a probability of 40% "));
+            tooltip.add(1, Text.literal("§6"+"Gives you fire resistance for 10 seconds or 200 ticks with a probability of 40% "));
         }
-        else{
-            pTooltipComponents.add(Component.literal("§7" + "Hold " + "§e" + "Shift " + "§7" + "for more information"));
+        else {
+            tooltip.add(Text.literal("§7" + "Hold " + "§e" + "Shift " + "§7" + "for more information"));
         }
-
-        super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
+        super.appendTooltip(pStack, pWorld, tooltip, ctx);
     }
 }

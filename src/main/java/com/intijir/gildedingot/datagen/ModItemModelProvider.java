@@ -2,16 +2,8 @@ package com.intijir.gildedingot.datagen;
 
 import com.intijir.gildedingot.GildedIngot;
 import com.intijir.gildedingot.block.ModBlocks;
-import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
-import net.minecraftforge.client.model.generators.ItemModelBuilder;
-import net.minecraftforge.client.model.generators.ItemModelProvider;
-import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
 
+/*
 public class ModItemModelProvider extends ItemModelProvider {
     public ModItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
         super(output, GildedIngot.MOD_ID, existingFileHelper);
@@ -28,7 +20,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.STRAWBERRY);
         */
 
-        simpleBlockItem(ModBlocks.GILDED_DOOR);
+        //simpleBlockItem(ModBlocks.GILDED_DOOR);
 
         /*
         fenceItem(ModBlocks.SAPPHIRE_FENCE, ModBlocks.SAPPHIRE_BLOCK);
@@ -41,7 +33,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         evenSimplerBlockItem(ModBlocks.SAPPHIRE_FENCE_GATE);
 
         trapdoorItem(ModBlocks.SAPPHIRE_TRAPDOOR);
-        */
+
     }
 
     private ItemModelBuilder simpleItem(RegistryObject<Item> item) {
@@ -81,3 +73,5 @@ public class ModItemModelProvider extends ItemModelProvider {
                 new ResourceLocation(GildedIngot.MOD_ID,"item/" + item.getId().getPath()));
     }
 }
+
+         */

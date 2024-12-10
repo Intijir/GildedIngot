@@ -1,10 +1,11 @@
 package com.intijir.gildedingot.block;
 
-import net.minecraft.world.level.block.SnowLayerBlock;
-import net.minecraft.world.level.material.MapColor;
+import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.MapColor;
+import net.minecraft.block.SnowBlock;
 
-public class GildedPile extends SnowLayerBlock {
+public class GildedPile extends SnowBlock {
     public GildedPile() {
-        super(Properties.of().mapColor(MapColor.SNOW).strength(2, 5));
+        super(AbstractBlock.Settings.create().mapColor(MapColor.WHITE).strength(2, 5));
     }
 }

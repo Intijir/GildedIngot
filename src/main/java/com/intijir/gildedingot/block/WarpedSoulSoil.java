@@ -1,120 +1,128 @@
 package com.intijir.gildedingot.block;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.tags.FluidTags;
-import net.minecraft.util.RandomSource;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.FenceGateBlock;
-import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.block.piston.MovingPistonBlock;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.IntegerProperty;
-import net.minecraft.world.level.material.MapColor;
+import net.minecraft.block.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.ai.pathing.NavigationType;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.registry.tag.FluidTags;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.state.StateManager;
+import net.minecraft.state.property.IntProperty;
+import net.minecraft.state.property.Properties;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.random.Random;
+import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.world.*;
+import net.minecraft.world.event.GameEvent;
 
-import net.minecraft.world.level.pathfinder.PathComputationType;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.VoxelShape;
-import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class WarpedSoulSoil extends Block {
-    public static final IntegerProperty MOISTURE = BlockStateProperties.MOISTURE;
-    protected static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 15.0D, 16.0D);
+    public static final IntProperty MOISTURE = Properties.MOISTURE;
+    protected static final VoxelShape SHAPE = Block.createCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 15.0D, 16.0D);
     public static final int MAX_MOISTURE = 7;
 
     public WarpedSoulSoil() {
-        super(Properties.of().mapColor(MapColor.SAND).strength(0.5f, 0.5f).sound(SoundType.SAND));
-        this.registerDefaultState(this.stateDefinition.any().setValue(MOISTURE, Integer.valueOf(0)));
+        super(AbstractBlock.Settings.create().mapColor(MapColor.PALE_YELLOW).strength(0.5f, 0.5f).sounds(BlockSoundGroup.SAND).ticksRandomly());
+        this.setDefaultState((BlockState)((BlockState)this.stateManager.getDefaultState()).with(MOISTURE, 0));
     }
 
-    public BlockState updateShape(@NotNull BlockState pState, @NotNull Direction pFacing, @NotNull BlockState pFacingState, @NotNull LevelAccessor pLevel, @NotNull BlockPos pCurrentPos, @NotNull BlockPos pFacingPos) {
-        if (pFacing == Direction.UP && !pState.canSurvive(pLevel, pCurrentPos)) {
-            pLevel.scheduleTick(pCurrentPos, this, 1);
+    @Override
+    public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, net.minecraft.util.math.BlockPos pos, net.minecraft.util.math.BlockPos neighborPos) {
+        if (direction == Direction.UP && !state.canPlaceAt(world, pos)) {
+            world.scheduleBlockTick(pos, this, 1);
         }
-        return super.updateShape(pState, pFacing, pFacingState, pLevel, pCurrentPos, pFacingPos);
+        return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
     }
 
-    public boolean canSurvive(@NotNull BlockState pState, LevelReader pLevel, BlockPos pPos) {
-        BlockState blockstate = pLevel.getBlockState(pPos.above());
-        return !blockstate.isSolid() || blockstate.getBlock() instanceof FenceGateBlock || blockstate.getBlock() instanceof MovingPistonBlock;
+    @Override
+    public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
+        BlockState blockState = world.getBlockState(pos.up());
+        return !blockState.isSolid() || blockState.getBlock() instanceof FenceGateBlock || blockState.getBlock() instanceof PistonExtensionBlock;
     }
 
-    public BlockState getStateForPlacement(BlockPlaceContext pContext) {
-        return !this.defaultBlockState().canSurvive(pContext.getLevel(), pContext.getClickedPos()) ? Blocks.SOUL_SOIL.defaultBlockState() : super.getStateForPlacement(pContext);
+    @Override
+    public BlockState getPlacementState(ItemPlacementContext ctx) {
+        if (!this.getDefaultState().canPlaceAt(ctx.getWorld(), ctx.getBlockPos())) {
+            return Blocks.SOUL_SOIL.getDefaultState();
+        }
+        return super.getPlacementState(ctx);
     }
 
-    public boolean useShapeForLightOcclusion(BlockState pState) {
+    @Override
+    public boolean hasSidedTransparency(BlockState state) {
         return true;
     }
 
-    public @NotNull VoxelShape getShape(@NotNull BlockState pState, @NotNull BlockGetter pLevel, @NotNull BlockPos pPos, @NotNull CollisionContext pContext) {
+    @Override
+    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return SHAPE;
     }
 
-    public void tick(BlockState pState, @NotNull ServerLevel pLevel, @NotNull BlockPos pPos, @NotNull RandomSource pRandomSource) {
-        if (!pState.canSurvive(pLevel, pPos)) {
-            turnToDirt(pState, pLevel, pPos);
+    @Override
+    public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+        if (!state.canPlaceAt(world, pos)) {
+            WarpedSoulSoil.setToSoulSoil(null, state, world, pos);
         }
     }
 
     /**
      * Performs a random tick on a block.
      */
-    public void randomTick(@NotNull BlockState pState, @NotNull ServerLevel pLevel, @NotNull BlockPos pPos, RandomSource pRandomSource) {
-        int i = pState.getValue(MOISTURE);
-        if (!isNearWater(pLevel, pPos) && !pLevel.isRainingAt(pPos.above())) {
-            if (i > 0) {
-                pLevel.setBlock(pPos, pState.setValue(MOISTURE, Integer.valueOf(i - 1)), 2);
-            } else if (!isUnderCrops(pLevel, pPos)) {
-                turnToDirt(pState, pLevel, pPos);
+    @Override
+    public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+        int i = state.get(MOISTURE);
+        if (WarpedSoulSoil.isNearLava(world, pos)) {
+            if (i < 7) {
+                world.setBlockState(pos, (BlockState)state.with(MOISTURE, 7), Block.NOTIFY_LISTENERS);
             }
-        } else if (i < 7) {
-            pLevel.setBlock(pPos, pState.setValue(MOISTURE, Integer.valueOf(7)), 2);
+        } else if (i > 0) {
+            world.setBlockState(pos, (BlockState)state.with(MOISTURE, i - 1), Block.NOTIFY_LISTENERS);
+        } else if (!hasCrop(world, pos)) {
+            WarpedSoulSoil.setToSoulSoil(null, state, world, pos);
         }
     }
 
-    public void fallOn(Level p_153227_, BlockState p_153228_, BlockPos p_153229_, Entity p_153230_, float p_153231_) {
-        if (!p_153227_.isClientSide && net.minecraftforge.common.ForgeHooks.onFarmlandTrample(p_153227_, p_153229_, Blocks.SOUL_SOIL.defaultBlockState(), p_153231_, p_153230_)) { // Forge: Move logic to Entity#canTrample
-            turnToDirt(p_153228_, p_153227_, p_153229_);
+    @Override
+    public void onLandedUpon(World world, BlockState state, BlockPos pos, Entity entity, float fallDistance) {
+        if (!world.isClient && world.random.nextFloat() < fallDistance - 0.5f && entity instanceof LivingEntity && (entity instanceof PlayerEntity || world.getGameRules().getBoolean(GameRules.DO_MOB_GRIEFING)) && entity.getWidth() * entity.getWidth() * entity.getHeight() > 0.512f) {
+            WarpedSoulSoil.setToSoulSoil(entity, state, world, pos);
         }
-        super.fallOn(p_153227_, p_153228_, p_153229_, p_153230_, p_153231_);
+        super.onLandedUpon(world, state, pos, entity, fallDistance);
     }
 
-    public static void turnToDirt(BlockState pState, Level pLevel, BlockPos pPos) {
-        pLevel.setBlockAndUpdate(pPos, pushEntitiesUp(pState, Blocks.SOUL_SOIL.defaultBlockState(), pLevel, pPos));
+    public static void setToSoulSoil(@Nullable Entity entity, BlockState state, World world, BlockPos pos) {
+        BlockState blockState = FarmlandBlock.pushEntitiesUpBeforeBlockChange(state, Blocks.SOUL_SOIL.getDefaultState(), world, pos);
+        world.setBlockState(pos, blockState);
+        world.emitGameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Emitter.of(entity, blockState));
     }
 
-    private static boolean isUnderCrops(BlockGetter pLevel, BlockPos pPos) {
-        BlockState plant = pLevel.getBlockState(pPos.above());
-        BlockState state = pLevel.getBlockState(pPos);
-        return plant.getBlock() instanceof net.minecraftforge.common.IPlantable && state.canSustainPlant(pLevel, pPos, Direction.UP, (net.minecraftforge.common.IPlantable)plant.getBlock());
+    private static boolean hasCrop(BlockView world, BlockPos pos) {
+        BlockState plant = world.getBlockState(pos.up());
+        return plant.getBlock() instanceof WarpedNetherWartCrop && world.getBlockState(pos.up()).isIn(BlockTags.MAINTAINS_FARMLAND);
     }
 
-    private static boolean isNearWater(LevelReader pLevel, BlockPos pPos) {
-        for(BlockPos blockpos : BlockPos.betweenClosed(pPos.offset(-4, 0, -4), pPos.offset(4, 1, 4))) {
-            if (pLevel.getFluidState(blockpos).is(FluidTags.LAVA)) {
-                return true;
-            }
+
+    private static boolean isNearLava(ServerWorld world, BlockPos pos) {
+        for (BlockPos blockPos : BlockPos.iterate(pos.add(-4, 0, -4), pos.add(4, 1, 4))) {
+            if (!world.getFluidState(blockPos).isIn(FluidTags.LAVA)) continue;
+            return true;
         }
-
-        return net.minecraftforge.common.FarmlandWaterManager.hasBlockWaterTicket(pLevel, pPos);
+        return false;
     }
 
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
-        pBuilder.add(MOISTURE);
+    @Override
+    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
+        builder.add(MOISTURE);
     }
 
-    public boolean isPathfindable(BlockState pState, BlockGetter pLevel, BlockPos pPos, PathComputationType pType) {
+    @Override
+    public boolean canPathfindThrough(BlockState state, BlockView world, BlockPos pos, NavigationType type) {
         return false;
     }
 }

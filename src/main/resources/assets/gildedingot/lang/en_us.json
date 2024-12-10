@@ -1,6 +1,6 @@
 {
   "item.gildedingot.gilded_ingot": "Gilded Ingot",
-  "itemGroup.GildedIngotMod": "Gilded Ingot",
+  "itemgroup.gilded_ingot": "Gilded Ingot",
   "creativetab.gildedingot_tab": "Gilded Ingot",
   "block.gildedingot.gilded_block": "Block of Gilded Ingot",
   "block.gildedingot.gilded_bricks": "Gilded Bricks",

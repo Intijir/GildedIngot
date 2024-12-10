@@ -1,0 +1,45 @@
+{
+	"schemaVersion": 1,
+	"id": "${mod_id}",
+	"version": "${version}",
+	"name": "${mod_name}",
+	"description": "This mod gives Gilded Blackstone a use (armor, Items, Blocks...), it also adds other small features to the nether.",
+	"authors": [
+		"Intijir",
+		"Maurisio",
+		"Pete MC Mods, mcmods.pete@gmail.com (Fabric Port)"
+	],
+	"contact": {
+		"homepage": "https://modrinth.com/mod/gilded-ingot",
+		"sources": "https://github.com/Intijir/GildedIngot",
+		"issues": "https://github.com/Intijir/GildedIngot/issues"
+	},
+	"license": "All Rights Reserved",
+	"icon": "GildedIngot.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"com.intijir.gildedingot.GildedIngot"
+		],
+		"client": [
+			"com.intijir.gildedingot.GildedIngotClient"
+		],
+		"fabric-datagen": [
+			"com.intijir.gildedingot.GildedIngotDataGenerator"
+		]
+	},
+	"mixins": [
+		"gildedingot.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=${loader_version}",
+		"minecraft": "${minecraft_version_range}",
+		"java": "${java_version_range}",
+		"fabric-api": "*",
+		"cloth-config": ">=${cloth_config_version}"
+	},
+	"suggests": {
+		"modmenu": ">=${modmenu_version}",
+		"another-mod": "*"
+	}
+}

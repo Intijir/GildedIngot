@@ -1,12 +1,13 @@
 package com.intijir.gildedingot.block;
 
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.DoorBlock;
-import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.block.state.properties.BlockSetType;
+import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.BlockSetType;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.DoorBlock;
+import net.minecraft.sound.BlockSoundGroup;
 
 public class GildedDoor extends DoorBlock {
     public GildedDoor() {
-        super(Properties.copy(Blocks.IRON_BLOCK).noOcclusion().strength(1, 4.2E7F).sound(SoundType.STONE), BlockSetType.IRON);
+        super(AbstractBlock.Settings.copy(Blocks.IRON_BLOCK).nonOpaque().strength(1, 4.2E7F).sounds(BlockSoundGroup.STONE), BlockSetType.IRON);
     }
 }

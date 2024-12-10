@@ -1,18 +1,10 @@
 package com.intijir.gildedingot.item;
 
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.RecipeType;
-
-import javax.annotation.Nullable;
+import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.minecraft.item.Item;
 
 public class GildedPebble extends Item {
     public GildedPebble() {
-        super(new Properties());
-    }
-
-    @Override
-    public int getBurnTime(ItemStack itemStack, @Nullable RecipeType<?> recipeType){
-        return 4800;
+        super(new FabricItemSettings());
     }
 }
