@@ -104,7 +104,7 @@ public class WarpedSoulSoil extends Block {
 
     private static boolean hasCrop(BlockView world, BlockPos pos) {
         BlockState plant = world.getBlockState(pos.up());
-        return plant.getBlock() instanceof WarpedNetherWartCrop && world.getBlockState(pos.up()).isIn(BlockTags.MAINTAINS_FARMLAND);
+        return plant.getBlock() instanceof WarpedNetherWartCrop && world.getBlockState(pos).isOf(ModBlocks.WARPED_SOUL_SOIL);
     }
 
 
