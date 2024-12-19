@@ -17,6 +17,8 @@ import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.shapes.ISelectionContext;
+import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
@@ -27,10 +29,11 @@ import net.minecraftforge.common.ToolType;
 
 public class WarpedSoulSoil extends Block {
     public static final IntegerProperty MOISTURE;
+    protected static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 15.0D, 16.0D);
 
     public WarpedSoulSoil() {
-        super(Properties.of(Material.SAND).strength(0.5F, 0.5F)
-                .harvestLevel(1).harvestTool(ToolType.SHOVEL).sound(SoundType.SAND).randomTicks());
+        super(Properties.of(Material.DIRT).strength(0.5F, 0.5F)
+                .harvestLevel(1).harvestTool(ToolType.SHOVEL).sound(SoundType.SOUL_SOIL).randomTicks());
     }
 
     public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
@@ -46,6 +49,10 @@ public class WarpedSoulSoil extends Block {
 
     public boolean useShapeForLightOcclusion(BlockState pState) {
         return true;
+    }
+
+    public VoxelShape getShape(BlockState pState, IBlockReader pLevel, BlockPos pPos, ISelectionContext pContext) {
+        return SHAPE;
     }
 
     public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand) {
@@ -79,13 +86,8 @@ public class WarpedSoulSoil extends Block {
         super.fallOn(worldIn, pos, entityIn, fallDistance);
     }
 
-    public static void turnToSoulSoil(BlockState state, World worldIn, BlockPos pos) {
-        BlockState plant = worldIn.getBlockState(pos.above());
-        if (plant == ModBlocks.WARPED_NETHER_WART_CROP.get().defaultBlockState()) {
-            BlockState blockstate = pushEntitiesUp(state, Blocks.SOUL_SOIL.defaultBlockState(), worldIn, pos);
-            worldIn.setBlockAndUpdate(pos, blockstate);
-        }
-        worldIn.setBlockAndUpdate(pos, Blocks.SOUL_SOIL.defaultBlockState());
+    public static void turnToSoulSoil(BlockState pState, World pLevel, BlockPos pPos) {
+        pLevel.setBlockAndUpdate(pPos, pushEntitiesUp(pState, Blocks.SOUL_SOIL.defaultBlockState(), pLevel, pPos));
     }
 
     private boolean hasCrops(IBlockReader worldIn, BlockPos pos) {

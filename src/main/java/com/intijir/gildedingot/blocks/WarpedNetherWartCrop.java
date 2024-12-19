@@ -10,6 +10,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
+import net.minecraft.world.server.ServerWorld;
+
+import java.util.Random;
 
 public class WarpedNetherWartCrop extends BeetrootBlock {
     private static final VoxelShape[] SHAPES =
@@ -34,6 +37,13 @@ public class WarpedNetherWartCrop extends BeetrootBlock {
 
     public VoxelShape getShape(BlockState state, IBlockReader blockReader, BlockPos blockPos, ISelectionContext selectionContext) {
         return SHAPES[(Integer)state.getValue(this.getAgeProperty())];
+    }
+
+    /**
+     * Performs a random tick on a block.
+     */
+    public void randomTick(BlockState pState, ServerWorld pLevel, BlockPos pPos, Random pRandom) {
+            super.randomTick(pState, pLevel, pPos, pRandom);
     }
 
     protected boolean mayPlaceOn(BlockState state, IBlockReader worldIn, BlockPos pos) {
