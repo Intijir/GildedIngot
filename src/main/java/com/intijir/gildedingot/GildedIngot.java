@@ -2,7 +2,6 @@ package com.intijir.gildedingot;
 
 import com.intijir.gildedingot.armor.ModArmor;
 import com.intijir.gildedingot.blocks.ModBlocks;
-import com.intijir.gildedingot.events.ModEvents;
 import com.intijir.gildedingot.items.ModItems;
 import com.intijir.gildedingot.setup.ClientProxy;
 import com.intijir.gildedingot.setup.IProxy;
@@ -51,6 +50,5 @@ public class GildedIngot {
         ModBlocks.register();
         ModTools.register();
         ModArmor.register();
-        MinecraftForge.EVENT_BUS.register(new ModEvents());
     }
 }
