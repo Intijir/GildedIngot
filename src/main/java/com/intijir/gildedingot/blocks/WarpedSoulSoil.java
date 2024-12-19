@@ -1,6 +1,7 @@
 package com.intijir.gildedingot.blocks;
 
 import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -21,9 +22,7 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
-import net.minecraftforge.common.FarmlandWaterManager;
 import net.minecraftforge.common.ForgeHooks;
-import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.ToolType;
 
 public class WarpedSoulSoil extends Block {
@@ -31,7 +30,7 @@ public class WarpedSoulSoil extends Block {
 
     public WarpedSoulSoil() {
         super(Properties.of(Material.SAND).strength(0.5F, 0.5F)
-                .harvestLevel(1).harvestTool(ToolType.SHOVEL).sound(SoundType.SAND));
+                .harvestLevel(1).harvestTool(ToolType.SHOVEL).sound(SoundType.SAND).randomTicks());
     }
 
     public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
@@ -81,23 +80,27 @@ public class WarpedSoulSoil extends Block {
     }
 
     public static void turnToSoulSoil(BlockState state, World worldIn, BlockPos pos) {
-        worldIn.setBlockAndUpdate(pos, pushEntitiesUp(state, Blocks.SOUL_SOIL.defaultBlockState(), worldIn, pos));
+        BlockState plant = worldIn.getBlockState(pos.above());
+        if (plant == ModBlocks.WARPED_NETHER_WART_CROP.get().defaultBlockState()) {
+            BlockState blockstate = pushEntitiesUp(state, Blocks.SOUL_SOIL.defaultBlockState(), worldIn, pos);
+            worldIn.setBlockAndUpdate(pos, blockstate);
+        }
+        worldIn.setBlockAndUpdate(pos, Blocks.SOUL_SOIL.defaultBlockState());
     }
 
     private boolean hasCrops(IBlockReader worldIn, BlockPos pos) {
         BlockState plant = worldIn.getBlockState(pos.above());
         BlockState state = worldIn.getBlockState(pos);
-        return plant.getBlock() instanceof IPlantable && state.canSustainPlant(worldIn, pos, Direction.UP, (IPlantable)plant.getBlock());
+        return plant.getBlock() instanceof WarpedNetherWartCrop && state.is(ModBlocks.WARPED_SOUL_SOIL.get());
     }
 
-    // isNearWater
     private static boolean isNearLava(IWorldReader worldIn, BlockPos pos) {
         for(BlockPos blockpos : BlockPos.betweenClosed(pos.offset(-4, 0, -4), pos.offset(4, 1, 4))) {
             if (worldIn.getFluidState(blockpos).is(FluidTags.LAVA)) {
                 return true;
             }
         }
-        return FarmlandWaterManager.hasBlockWaterTicket(worldIn, pos);
+        return false;
     }
 
     protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {

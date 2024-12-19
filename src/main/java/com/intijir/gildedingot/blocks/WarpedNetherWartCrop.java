@@ -25,7 +25,7 @@ public class WarpedNetherWartCrop extends BeetrootBlock {
     };
 
     public WarpedNetherWartCrop(AbstractBlock.Properties builder) {
-        super(builder);
+        super(builder.randomTicks());
     }
 
     protected IItemProvider getBaseSeedId() {

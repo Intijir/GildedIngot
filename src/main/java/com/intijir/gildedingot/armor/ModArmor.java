@@ -1,10 +1,11 @@
 package com.intijir.gildedingot.armor;
 
-import com.intijir.gildedingot.GildedIngot;
+import com.intijir.gildedingot.items.GildedBoots;
+import com.intijir.gildedingot.items.GildedChestplate;
+import com.intijir.gildedingot.items.GildedHelmet;
+import com.intijir.gildedingot.items.GildedLeggings;
 import com.intijir.gildedingot.util.Registration;
-import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ArmorItem;
-import net.minecraft.item.Item;
 import net.minecraftforge.fml.RegistryObject;
 
 public class ModArmor {
@@ -20,9 +21,9 @@ public class ModArmor {
     }
 
     static {
-        GILDED_HELMET = Registration.ITEMS.register("gilded_helmet", () -> new ArmorItem(ModArmorMaterials.GILDED, EquipmentSlotType.HEAD, (new Item.Properties()).tab(GildedIngot.TAB)));
-        GILDED_CHESTPLATE = Registration.ITEMS.register("gilded_chestplate", () -> new ArmorItem(ModArmorMaterials.GILDED, EquipmentSlotType.CHEST, (new Item.Properties()).tab(GildedIngot.TAB)));
-        GILDED_LEGGINGS = Registration.ITEMS.register("gilded_leggings", () -> new ArmorItem(ModArmorMaterials.GILDED, EquipmentSlotType.LEGS, (new Item.Properties()).tab(GildedIngot.TAB)));
-        GILDED_BOOTS = Registration.ITEMS.register("gilded_boots", () -> new ArmorItem(ModArmorMaterials.GILDED, EquipmentSlotType.FEET, (new Item.Properties()).tab(GildedIngot.TAB)));
+        GILDED_HELMET = Registration.ITEMS.register("gilded_helmet", GildedHelmet::new);
+        GILDED_CHESTPLATE = Registration.ITEMS.register("gilded_chestplate", GildedChestplate::new);
+        GILDED_LEGGINGS = Registration.ITEMS.register("gilded_leggings", GildedLeggings::new);
+        GILDED_BOOTS = Registration.ITEMS.register("gilded_boots", GildedBoots::new);
     }
 }

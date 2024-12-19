@@ -8,6 +8,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 public class ModEvents {
 
+/*
     @SubscribeEvent
     public void disablePlantingFarmLand(PlayerInteractEvent.RightClickBlock event){
         if (event.getPlayer().getMainHandItem().getItem() == ModItems.WARPED_WART_SEED.get()){
@@ -27,4 +28,8 @@ public class ModEvents {
             }
         }
     }
+
+ */
+
+
 }

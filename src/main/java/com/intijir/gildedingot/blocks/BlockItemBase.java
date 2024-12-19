@@ -1,8 +1,3 @@
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by FernFlower decompiler)
-//
-
 package com.intijir.gildedingot.blocks;
 
 import com.intijir.gildedingot.GildedIngot;

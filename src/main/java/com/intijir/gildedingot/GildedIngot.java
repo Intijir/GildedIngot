@@ -1,8 +1,3 @@
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by FernFlower decompiler)
-//
-
 package com.intijir.gildedingot;
 
 import com.intijir.gildedingot.armor.ModArmor;
@@ -28,6 +23,8 @@ import org.apache.logging.log4j.Logger;
 @Mod("gildedingot")
 public class GildedIngot {
     public static final String MOD_ID = "gildedingot";
+    public static final String MOD_NAME = "Gilded Ingot";
+
     public static final ItemGroup TAB = new ItemGroup("GildedIngot") {
         public ItemStack makeIcon() {
             return new ItemStack((IItemProvider)ModItems.GILDED_INGOT.get());
@@ -37,6 +34,7 @@ public class GildedIngot {
     public static final Logger LOGGER = LogManager.getLogger();
 
     public GildedIngot() {
+        LOGGER.info("Initializing the {} Mod", MOD_NAME);
         proxy = (IProxy)DistExecutor.safeRunForDist(() -> ClientProxy::new, () -> ServerProxy::new);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         this.registerModAdditions();

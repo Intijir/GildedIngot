@@ -1,7 +1,6 @@
 package com.intijir.gildedingot.blocks;
 
 import net.minecraft.block.SnowBlock;
-import net.minecraft.block.AbstractBlock.Properties;
 import net.minecraft.block.material.Material;
 import net.minecraftforge.common.ToolType;
 
