@@ -30,20 +30,14 @@ public class ModItems {
     public static final DeferredItem<Item> GILDED_NUGGET = ITEMS.register("gilded_nugget",
             () -> new Item(new Item.Properties()));
 
-    public static final DeferredItem<Item> WARPED_WART_SEED =
-            ITEMS.register("warped_wart_seed",
-                    () -> new BlockItem(ModBlocks.WARPED_NETHER_WART_CROP.get(),
-                            new Item.Properties()));
+    public static final DeferredItem<Item> WARPED_WART_SEED = ITEMS.register("warped_wart_seed", WarpedSeed::new);
 
 
-    public static final DeferredItem<Item> SHROOM_FRUIT = ITEMS.register("shroom_fruit",
-            ShroomFruit::new);
+    public static final DeferredItem<Item> SHROOM_FRUIT = ITEMS.register("shroom_fruit", ShroomFruit::new);
 
-    public static final DeferredItem<Item> WARPED_WART = ITEMS.register("warped_wart",
-            WarpedWart::new);
+    public static final DeferredItem<Item> WARPED_WART = ITEMS.register("warped_wart", WarpedWart::new);
 
-    public static final DeferredItem<Item> GILDED_PEBBLE = ITEMS.register("gilded_pebble",
-            GildedPebble::new);
+    public static final DeferredItem<Item> GILDED_PEBBLE = ITEMS.register("gilded_pebble", GildedPebble::new);
 
 
     // Tools
@@ -69,18 +63,13 @@ public class ModItems {
 
 
     // Armor
-    public static final DeferredItem<ArmorItem> GILDED_HELMET = ITEMS.register("gilded_helmet",
-            () -> new ArmorItem(ModArmorMaterials.GILDED, ArmorItem.Type.HELMET, (new Item.Properties())));
+    public static final DeferredItem<ArmorItem> GILDED_HELMET = ITEMS.register("gilded_helmet", GildedHelmet::new);
 
-    public static final DeferredItem<ArmorItem> GILDED_CHESTPLATE = ITEMS.register("gilded_chestplate",
-            () -> new ArmorItem(ModArmorMaterials.GILDED, ArmorItem.Type.CHESTPLATE, (new Item.Properties())));
+    public static final DeferredItem<ArmorItem> GILDED_CHESTPLATE = ITEMS.register("gilded_chestplate", GildedChestplate::new);
 
-    public static final DeferredItem<ArmorItem> GILDED_LEGGINGS = ITEMS.register("gilded_leggings",
-            () -> new ArmorItem(ModArmorMaterials.GILDED, ArmorItem.Type.LEGGINGS, (new Item.Properties())));
+    public static final DeferredItem<ArmorItem> GILDED_LEGGINGS = ITEMS.register("gilded_leggings", GildedLeggings::new);
 
-    public static final DeferredItem<ArmorItem> GILDED_BOOTS = ITEMS.register("gilded_boots",
-            () -> new ArmorItem(ModArmorMaterials.GILDED, ArmorItem.Type.BOOTS, (new Item.Properties())));
-
+    public static final DeferredItem<ArmorItem> GILDED_BOOTS = ITEMS.register("gilded_boots", GildedBoots::new);
 
 
     public static void register(IEventBus eventBus) {

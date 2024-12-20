@@ -16,11 +16,12 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.neoforged.neoforge.common.CommonHooks;
 import org.jetbrains.annotations.NotNull;
 
 public class WarpedNetherWartCrop extends BeetrootBlock {
     public WarpedNetherWartCrop() {
-        super(Properties.ofFullCopy(Blocks.NETHER_WART));
+        super(Properties.ofFullCopy(Blocks.NETHER_WART).randomTicks());
     }
 
     public static final IntegerProperty AGE = BlockStateProperties.AGE_3;
@@ -41,9 +42,12 @@ public class WarpedNetherWartCrop extends BeetrootBlock {
     /**
      * Performs a random tick on a block.
      */
-    public void randomTick(@NotNull BlockState pState, @NotNull ServerLevel pLevel, @NotNull BlockPos pPos, RandomSource pRandomSource) {
-        if (pRandomSource.nextInt(3) != 0) {
-            super.randomTick(pState, pLevel, pPos, pRandomSource);
+    public void randomTick(@NotNull BlockState state, @NotNull ServerLevel level, @NotNull BlockPos pos, @NotNull RandomSource random) {
+        int i = (Integer)state.getValue(AGE);
+        if (i < 3 && CommonHooks.canCropGrow(level, pos, state, random.nextInt(10) == 0)) {
+            state = (BlockState)state.setValue(AGE, i + 1);
+            level.setBlock(pos, state, 2);
+            CommonHooks.fireCropGrowPost(level, pos, state);
         }
     }
 
