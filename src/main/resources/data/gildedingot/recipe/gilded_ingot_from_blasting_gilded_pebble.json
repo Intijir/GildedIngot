@@ -1,11 +1,11 @@
 {
   "type": "minecraft:blasting",
   "category": "misc",
-  "cookingtime": 50,
-  "experience": 1.0,
+  "cookingtime": 100,
+  "experience": 0.2,
   "group": "gilded_ingot",
   "ingredient": {
-    "item": "minecraft:gilded_blackstone"
+    "item": "gildedingot:gilded_pebble"
   },
   "result": {
     "id": "gildedingot:gilded_ingot"
