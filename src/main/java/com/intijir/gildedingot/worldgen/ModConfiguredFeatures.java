@@ -20,12 +20,12 @@ public class ModConfiguredFeatures {
 
     public static void bootstrap(BootstrapContext<ConfiguredFeature<?, ?>> context) {
         RuleTest basaltReplaceables = new BlockMatchTest(Blocks.BASALT);
-        RuleTest netherrackReplacables = new BlockMatchTest(Blocks.NETHERRACK);
+        //RuleTest netherrackReplacables = new BlockMatchTest(Blocks.NETHERRACK);
 
         register(context, NETHER_BASALT_LAPIS_ORE_KEY, Feature.ORE, new OreConfiguration(basaltReplaceables,
                 ModBlocks.BASALT_LAPIS.get().defaultBlockState(), 9));
-        register(context, NETHER_GILDED_BLACKSTONE_ORE_KEY, Feature.ORE, new OreConfiguration(netherrackReplacables,
-                Blocks.GILDED_BLACKSTONE.defaultBlockState(), 3));
+        register(context, NETHER_GILDED_BLACKSTONE_ORE_KEY, Feature.ORE, new OreConfiguration(basaltReplaceables,
+                Blocks.GILDED_BLACKSTONE.defaultBlockState(), 6));
     }
 
     // Helper funtions
