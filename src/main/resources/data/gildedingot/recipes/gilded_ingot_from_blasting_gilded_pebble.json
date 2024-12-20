@@ -4,6 +4,6 @@
     "item": "gildedingot:gilded_pebble"
   },
   "result": "gildedingot:gilded_ingot",
-  "experience": 1.0,
+  "experience": 0.2,
   "cookingtime": 100
 }

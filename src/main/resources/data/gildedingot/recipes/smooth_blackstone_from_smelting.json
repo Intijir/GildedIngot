@@ -4,6 +4,6 @@
     "item": "minecraft:blackstone"
   },
   "result": "gildedingot:smooth_blackstone",
-  "experience": 1.0,
-  "cookingtime": 160
+  "experience": 0.2,
+  "cookingtime": 200
 }
