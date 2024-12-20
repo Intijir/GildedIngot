@@ -7,6 +7,7 @@ import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BiomeTags;
+import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraftforge.common.world.BiomeModifier;
 import net.minecraftforge.common.world.ForgeBiomeModifiers;
@@ -22,12 +23,12 @@ public class ModBiomeModifiers {
         var biomes = context.lookup(Registries.BIOME);
 
         context.register(ADD_NETHER_BASALT_LAPIS_ORE, new ForgeBiomeModifiers.AddFeaturesBiomeModifier(
-                biomes.getOrThrow(BiomeTags.IS_NETHER),
+                HolderSet.direct(biomes.getOrThrow(Biomes.BASALT_DELTAS)),
                 HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.NETHER_BASALT_LAPIS_ORE_PLACED_KEY)),
                 GenerationStep.Decoration.UNDERGROUND_ORES));
 
         context.register(ADD_NETHER_GILDED_BLACKSTONE_ORE, new ForgeBiomeModifiers.AddFeaturesBiomeModifier(
-                biomes.getOrThrow(BiomeTags.IS_NETHER),
+                HolderSet.direct(biomes.getOrThrow(Biomes.BASALT_DELTAS)),
                 HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.NETHER_GILDED_BLACKSTONE_ORE_PLACED_KEY)),
                 GenerationStep.Decoration.UNDERGROUND_ORES));
     }
