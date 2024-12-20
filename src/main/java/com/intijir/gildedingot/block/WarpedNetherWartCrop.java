@@ -20,7 +20,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class WarpedNetherWartCrop extends BeetrootBlock {
     public WarpedNetherWartCrop() {
-        super(Properties.copy(Blocks.NETHER_WART));
+        super(Properties.copy(Blocks.NETHER_WART).randomTicks());
     }
 
     public static final IntegerProperty AGE = BlockStateProperties.AGE_3;
@@ -41,9 +41,12 @@ public class WarpedNetherWartCrop extends BeetrootBlock {
     /**
      * Performs a random tick on a block.
      */
-    public void randomTick(@NotNull BlockState pState, @NotNull ServerLevel pLevel, @NotNull BlockPos pPos, RandomSource pRandomSource) {
-        if (pRandomSource.nextInt(3) != 0) {
-            super.randomTick(pState, pLevel, pPos, pRandomSource);
+    public void randomTick(@NotNull BlockState pState, @NotNull ServerLevel pLevel, @NotNull BlockPos pPos, @NotNull RandomSource pRandom) {
+        int i = pState.getValue(AGE);
+        if (i < 3 && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(pLevel, pPos, pState, pRandom.nextInt(10) == 0)) {
+            pState = pState.setValue(AGE, i + 1);
+            pLevel.setBlock(pPos, pState, 2);
+            net.minecraftforge.common.ForgeHooks.onCropsGrowPost(pLevel, pPos, pState);
         }
     }
 

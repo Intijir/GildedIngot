@@ -1,7 +1,6 @@
 package com.intijir.gildedingot;
 
 import com.intijir.gildedingot.block.ModBlocks;
-import com.intijir.gildedingot.event.ModEvents;
 import com.intijir.gildedingot.item.ModCreativeModTabs;
 import com.intijir.gildedingot.item.ModItems;
 import com.mojang.logging.LogUtils;
@@ -35,7 +34,6 @@ public class GildedIngot {
         eventBus.addListener(this::clientSetup);
         eventBus.addListener(this::addCreative);
 
-        MinecraftForge.EVENT_BUS.register(new ModEvents());
         MinecraftForge.EVENT_BUS.register(this);
     }
 

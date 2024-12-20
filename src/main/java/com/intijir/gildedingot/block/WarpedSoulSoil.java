@@ -11,10 +11,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.FenceGateBlock;
-import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.piston.MovingPistonBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -33,7 +30,7 @@ public class WarpedSoulSoil extends Block {
     public static final int MAX_MOISTURE = 7;
 
     public WarpedSoulSoil() {
-        super(Properties.of().mapColor(MapColor.SAND).strength(0.5f, 0.5f).sound(SoundType.SAND));
+        super(Properties.of().mapColor(MapColor.DIRT).strength(0.5f, 0.5f).sound(SoundType.SOUL_SOIL).randomTicks());
         this.registerDefaultState(this.stateDefinition.any().setValue(MOISTURE, Integer.valueOf(0)));
     }
 
@@ -63,51 +60,50 @@ public class WarpedSoulSoil extends Block {
 
     public void tick(BlockState pState, @NotNull ServerLevel pLevel, @NotNull BlockPos pPos, @NotNull RandomSource pRandomSource) {
         if (!pState.canSurvive(pLevel, pPos)) {
-            turnToDirt(pState, pLevel, pPos);
+            turnToSoulSoil(pState, pLevel, pPos);
         }
     }
 
     /**
      * Performs a random tick on a block.
      */
-    public void randomTick(@NotNull BlockState pState, @NotNull ServerLevel pLevel, @NotNull BlockPos pPos, RandomSource pRandomSource) {
+    public void randomTick(@NotNull BlockState pState, @NotNull ServerLevel pLevel, @NotNull BlockPos pPos, @NotNull RandomSource pRandomSource) {
         int i = pState.getValue(MOISTURE);
-        if (!isNearWater(pLevel, pPos) && !pLevel.isRainingAt(pPos.above())) {
+        if (!isNearLava(pLevel, pPos) && !pLevel.isRainingAt(pPos.above())) {
             if (i > 0) {
-                pLevel.setBlock(pPos, pState.setValue(MOISTURE, Integer.valueOf(i - 1)), 2);
+                pLevel.setBlock(pPos, pState.setValue(MOISTURE, i - 1), 2);
             } else if (!isUnderCrops(pLevel, pPos)) {
-                turnToDirt(pState, pLevel, pPos);
+                turnToSoulSoil(pState, pLevel, pPos);
             }
         } else if (i < 7) {
-            pLevel.setBlock(pPos, pState.setValue(MOISTURE, Integer.valueOf(7)), 2);
+            pLevel.setBlock(pPos, pState.setValue(MOISTURE, 7), 2);
         }
     }
 
-    public void fallOn(Level p_153227_, BlockState p_153228_, BlockPos p_153229_, Entity p_153230_, float p_153231_) {
-        if (!p_153227_.isClientSide && net.minecraftforge.common.ForgeHooks.onFarmlandTrample(p_153227_, p_153229_, Blocks.SOUL_SOIL.defaultBlockState(), p_153231_, p_153230_)) { // Forge: Move logic to Entity#canTrample
-            turnToDirt(p_153228_, p_153227_, p_153229_);
+    public void fallOn(Level pLevel, @NotNull BlockState blockState, @NotNull BlockPos blockPos, @NotNull Entity pEntity, float pFallDistance) {
+        if (!pLevel.isClientSide && net.minecraftforge.common.ForgeHooks.onFarmlandTrample(pLevel, blockPos, Blocks.SOUL_SOIL.defaultBlockState(), pFallDistance, pEntity)) { // Forge: Move logic to Entity#canTrample
+            turnToSoulSoil(blockState, pLevel, blockPos);
         }
-        super.fallOn(p_153227_, p_153228_, p_153229_, p_153230_, p_153231_);
+        super.fallOn(pLevel, blockState, blockPos, pEntity, pFallDistance);
     }
 
-    public static void turnToDirt(BlockState pState, Level pLevel, BlockPos pPos) {
+    public static void turnToSoulSoil(BlockState pState, Level pLevel, BlockPos pPos) {
         pLevel.setBlockAndUpdate(pPos, pushEntitiesUp(pState, Blocks.SOUL_SOIL.defaultBlockState(), pLevel, pPos));
     }
 
     private static boolean isUnderCrops(BlockGetter pLevel, BlockPos pPos) {
         BlockState plant = pLevel.getBlockState(pPos.above());
         BlockState state = pLevel.getBlockState(pPos);
-        return plant.getBlock() instanceof net.minecraftforge.common.IPlantable && state.canSustainPlant(pLevel, pPos, Direction.UP, (net.minecraftforge.common.IPlantable)plant.getBlock());
+        return plant.getBlock() instanceof WarpedNetherWartCrop && state.is(ModBlocks.WARPED_SOUL_SOIL.get());
     }
 
-    private static boolean isNearWater(LevelReader pLevel, BlockPos pPos) {
+    private static boolean isNearLava(LevelReader pLevel, BlockPos pPos) {
         for(BlockPos blockpos : BlockPos.betweenClosed(pPos.offset(-4, 0, -4), pPos.offset(4, 1, 4))) {
             if (pLevel.getFluidState(blockpos).is(FluidTags.LAVA)) {
                 return true;
             }
         }
-
-        return net.minecraftforge.common.FarmlandWaterManager.hasBlockWaterTicket(pLevel, pPos);
+        return false;
     }
 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
