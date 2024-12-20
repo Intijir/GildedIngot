@@ -26,15 +26,13 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Random;
-
 public class WarpedSoulSoil extends Block {
     public static final IntegerProperty MOISTURE = BlockStateProperties.MOISTURE;
     protected static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 15.0D, 16.0D);
     public static final int MAX_MOISTURE = 7;
 
     public WarpedSoulSoil() {
-        super(Properties.of(Material.SAND).strength(0.5f, 0.5f).sound(SoundType.SAND));
+        super(Properties.of(Material.DIRT).strength(0.5f, 0.5f).sound(SoundType.SOUL_SOIL).randomTicks());
         this.registerDefaultState(this.stateDefinition.any().setValue(MOISTURE, Integer.valueOf(0)));
     }
 
@@ -64,7 +62,7 @@ public class WarpedSoulSoil extends Block {
 
     public void tick(BlockState pState, @NotNull ServerLevel pLevel, @NotNull BlockPos pPos, @NotNull RandomSource pRandomSource) {
         if (!pState.canSurvive(pLevel, pPos)) {
-            turnToDirt(pState, pLevel, pPos);
+            turnToSoulSoil(pState, pLevel, pPos);
         }
     }
 
@@ -73,11 +71,11 @@ public class WarpedSoulSoil extends Block {
      */
     public void randomTick(@NotNull BlockState pState, @NotNull ServerLevel pLevel, @NotNull BlockPos pPos, RandomSource pRandomSource) {
         int i = pState.getValue(MOISTURE);
-        if (!isNearWater(pLevel, pPos) && !pLevel.isRainingAt(pPos.above())) {
+        if (!isNearLava(pLevel, pPos) && !pLevel.isRainingAt(pPos.above())) {
             if (i > 0) {
                 pLevel.setBlock(pPos, pState.setValue(MOISTURE, Integer.valueOf(i - 1)), 2);
             } else if (!isUnderCrops(pLevel, pPos)) {
-                turnToDirt(pState, pLevel, pPos);
+                turnToSoulSoil(pState, pLevel, pPos);
             }
         } else if (i < 7) {
             pLevel.setBlock(pPos, pState.setValue(MOISTURE, Integer.valueOf(7)), 2);
@@ -86,12 +84,12 @@ public class WarpedSoulSoil extends Block {
 
     public void fallOn(Level p_153227_, BlockState p_153228_, BlockPos p_153229_, Entity p_153230_, float p_153231_) {
         if (!p_153227_.isClientSide && net.minecraftforge.common.ForgeHooks.onFarmlandTrample(p_153227_, p_153229_, Blocks.SOUL_SOIL.defaultBlockState(), p_153231_, p_153230_)) { // Forge: Move logic to Entity#canTrample
-            turnToDirt(p_153228_, p_153227_, p_153229_);
+            turnToSoulSoil(p_153228_, p_153227_, p_153229_);
         }
         super.fallOn(p_153227_, p_153228_, p_153229_, p_153230_, p_153231_);
     }
 
-    public static void turnToDirt(BlockState pState, Level pLevel, BlockPos pPos) {
+    public static void turnToSoulSoil(BlockState pState, Level pLevel, BlockPos pPos) {
         pLevel.setBlockAndUpdate(pPos, pushEntitiesUp(pState, Blocks.SOUL_SOIL.defaultBlockState(), pLevel, pPos));
     }
 
@@ -101,7 +99,7 @@ public class WarpedSoulSoil extends Block {
         return plant.getBlock() instanceof net.minecraftforge.common.IPlantable && state.canSustainPlant(pLevel, pPos, Direction.UP, (net.minecraftforge.common.IPlantable)plant.getBlock());
     }
 
-    private static boolean isNearWater(LevelReader pLevel, BlockPos pPos) {
+    private static boolean isNearLava(LevelReader pLevel, BlockPos pPos) {
         for(BlockPos blockpos : BlockPos.betweenClosed(pPos.offset(-4, 0, -4), pPos.offset(4, 1, 4))) {
             if (pLevel.getFluidState(blockpos).is(FluidTags.LAVA)) {
                 return true;

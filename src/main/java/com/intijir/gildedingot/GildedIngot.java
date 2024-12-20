@@ -1,7 +1,6 @@
 package com.intijir.gildedingot;
 
 import com.intijir.gildedingot.blocks.ModBlocks;
-import com.intijir.gildedingot.events.ModEvents;
 import com.intijir.gildedingot.items.ModItems;
 import com.intijir.gildedingot.world.feature.ModConfiguredFeatures;
 import com.intijir.gildedingot.world.feature.ModPlacedFeatures;
@@ -45,8 +44,6 @@ public class GildedIngot {
 
         eventBus.addListener(this::setup);
         eventBus.addListener(this::clientSetup);
-
-        MinecraftForge.EVENT_BUS.register(new ModEvents());
 
         MinecraftForge.EVENT_BUS.register(this);
     }

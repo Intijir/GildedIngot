@@ -30,22 +30,15 @@ public class ModItems {
     public static final RegistryObject<Item> GILDED_NUGGET = ITEMS.register("gilded_nugget",
             () -> new Item(new Item.Properties().tab(com.intijir.gildedingot.GildedIngot.TAB)));
 
-    public static final RegistryObject<Item> WARPED_WART_SEED =
-            ITEMS.register("warped_wart_seed",
-                    () -> new BlockItem(ModBlocks.WARPED_NETHER_WART_CROP.get(),
-                            new Item.Properties().tab(GildedIngot.TAB)));
+    public static final RegistryObject<Item> WARPED_WART_SEED = ITEMS.register("warped_wart_seed", WarpedSeed::new);
 
-    public static final RegistryObject<Item> SHROOM_FRUIT = ITEMS.register("shroom_fruit",
-            () -> new ShroomFruit());
+    public static final RegistryObject<Item> SHROOM_FRUIT = ITEMS.register("shroom_fruit", ShroomFruit::new);
 
-    public static final RegistryObject<Item> WARPED_WART = ITEMS.register("warped_wart",
-            () -> new WarpedWart());
+    public static final RegistryObject<Item> WARPED_WART = ITEMS.register("warped_wart", WarpedWart::new);
 
-    public static final RegistryObject<Item> GILDED_PEBBLE = ITEMS.register("gilded_pebble",
-            () -> new GildedPebble());
+    public static final RegistryObject<Item> GILDED_PEBBLE = ITEMS.register("gilded_pebble", GildedPebble::new);
 
     // TOOLS DOWN HERE
-
     public static final RegistryObject<Item> GILDED_SWORD = ITEMS.register("gilded_sword",
             () -> new SwordItem(ModTiers.GILDED, 4, -2.4F, new Item.Properties().tab(com.intijir.gildedingot.GildedIngot.TAB)));
 
@@ -62,22 +55,13 @@ public class ModItems {
             () -> new HoeItem(ModTiers.GILDED, 0, -1.0f, new Item.Properties().tab(com.intijir.gildedingot.GildedIngot.TAB)));
 
     // ARMOR DOWN HERE
+    public static final RegistryObject<Item> GILDED_HELMET = ITEMS.register("gilded_helmet", GildedHelmet::new);
 
-    public static final RegistryObject<Item> GILDED_HELMET = ITEMS.register("gilded_helmet", () -> {
-        return new ArmorItem(ModArmorMaterials.GILDED, EquipmentSlot.HEAD, (new Item.Properties()).tab(GildedIngot.TAB));
-    });
+    public static final RegistryObject<Item> GILDED_CHESTPLATE = ITEMS.register("gilded_chestplate", GildedChestplate::new);
 
-    public static final RegistryObject<Item> GILDED_CHESTPLATE = ITEMS.register("gilded_chestplate", () -> {
-        return new ArmorItem(ModArmorMaterials.GILDED, EquipmentSlot.CHEST, (new Item.Properties()).tab(GildedIngot.TAB));
-    });
+    public static final RegistryObject<Item> GILDED_LEGGINGS = ITEMS.register("gilded_leggings", GildedLeggings::new);
 
-    public static final RegistryObject<Item> GILDED_LEGGINGS = ITEMS.register("gilded_leggings", () -> {
-        return new ArmorItem(ModArmorMaterials.GILDED, EquipmentSlot.LEGS, (new Item.Properties()).tab(GildedIngot.TAB));
-    });
-
-    public static final RegistryObject<Item> GILDED_BOOTS = ITEMS.register("gilded_boots", () -> {
-        return new ArmorItem(ModArmorMaterials.GILDED, EquipmentSlot.FEET, (new Item.Properties()).tab(GildedIngot.TAB));
-    });
+    public static final RegistryObject<Item> GILDED_BOOTS = ITEMS.register("gilded_boots", GildedBoots::new);
 
     public static void register(IEventBus eventBus){
         ITEMS.register(eventBus);
