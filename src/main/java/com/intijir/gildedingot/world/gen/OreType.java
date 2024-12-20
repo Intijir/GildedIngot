@@ -5,8 +5,8 @@ import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 
 public enum OreType {
-    GILDED(Blocks.GILDED_BLACKSTONE.getBlock(), 3, 6, 128),
-    GILDED_BASALT_LAPIS(ModBlocks.BASALT_LAPIS.get(), 4, 80, 128),
+    GILDED(Blocks.GILDED_BLACKSTONE.getBlock(), 6, 6, 128),
+    GILDED_BASALT_LAPIS(ModBlocks.BASALT_LAPIS.get(), 9, 80, 128),
     GILDED_OBSIDIAN(Blocks.OBSIDIAN.getBlock(), 32, 10, 29);
 
     private final Block block;
