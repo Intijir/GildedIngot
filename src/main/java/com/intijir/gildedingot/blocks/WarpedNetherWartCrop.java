@@ -43,7 +43,12 @@ public class WarpedNetherWartCrop extends BeetrootBlock {
      * Performs a random tick on a block.
      */
     public void randomTick(BlockState pState, ServerWorld pLevel, BlockPos pPos, Random pRandom) {
-            super.randomTick(pState, pLevel, pPos, pRandom);
+        int i = pState.getValue(AGE);
+        if (i < 3 && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(pLevel, pPos, pState, pRandom.nextInt(10) == 0)) {
+            pState = pState.setValue(AGE, i + 1);
+            pLevel.setBlock(pPos, pState, 2);
+            net.minecraftforge.common.ForgeHooks.onCropsGrowPost(pLevel, pPos, pState);
+        }
     }
 
     protected boolean mayPlaceOn(BlockState state, IBlockReader worldIn, BlockPos pos) {
