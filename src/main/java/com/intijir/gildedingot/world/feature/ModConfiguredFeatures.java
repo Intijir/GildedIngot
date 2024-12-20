@@ -35,7 +35,7 @@ public class ModConfiguredFeatures {
             OreConfiguration.target(OreFeatures.NETHER_ORE_REPLACEABLES, Blocks.GILDED_BLACKSTONE.defaultBlockState()));
 
     public static final RegistryObject<ConfiguredFeature<?, ?>> GILDED_BLACKSTONE = CONFIGURED_FEATURES.register("gilded_blackstone",
-            () -> new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(NETHER_GILDED_BLACKSTONE, 3)));
+            () -> new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(NETHER_GILDED_BLACKSTONE, 6)));
 
 
     public static void register(IEventBus eventBus) {
