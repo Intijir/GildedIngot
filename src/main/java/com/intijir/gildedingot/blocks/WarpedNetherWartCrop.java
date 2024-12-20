@@ -19,7 +19,7 @@ import java.util.Random;
 
 public class WarpedNetherWartCrop extends BeetrootBlock {
     public WarpedNetherWartCrop() {
-        super(Properties.copy(Blocks.NETHER_WART));
+        super(Properties.copy(Blocks.NETHER_WART).randomTicks());
     }
 
     public static final int MAX_AGE = 3;
@@ -42,10 +42,12 @@ public class WarpedNetherWartCrop extends BeetrootBlock {
      * Performs a random tick on a block.
      */
     public void randomTick(BlockState pState, ServerLevel pLevel, BlockPos pPos, Random pRandom) {
-        if (pRandom.nextInt(3) != 0) {
-            super.randomTick(pState, pLevel, pPos, pRandom);
+        int i = pState.getValue(AGE);
+        if (i < 3 && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(pLevel, pPos, pState, pRandom.nextInt(10) == 0)) {
+            pState = pState.setValue(AGE, i + 1);
+            pLevel.setBlock(pPos, pState, 2);
+            net.minecraftforge.common.ForgeHooks.onCropsGrowPost(pLevel, pPos, pState);
         }
-
     }
 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
