@@ -24,5 +24,5 @@ public class ModConfiguredFeatures {
             OreConfiguration.target(OreFeatures.NETHER_ORE_REPLACEABLES, Blocks.GILDED_BLACKSTONE.defaultBlockState()));
 
     public static final Holder<ConfiguredFeature<OreConfiguration, ?>> GILDED_BLACKSTONE = FeatureUtils.register("gilded_blackstone",
-            Feature.ORE, new OreConfiguration(NETHER_GILDED_BLACKSTONE, 3));
+            Feature.ORE, new OreConfiguration(NETHER_GILDED_BLACKSTONE, 6));
 }
