@@ -43,8 +43,10 @@ public class WarpedNetherWartCrop extends BeetrootsBlock {
      */
     @Override
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        if (random.nextInt(3) != 0) {
-            super.randomTick(state, world, pos, random);
+        int i = state.get(AGE);
+        if (i < 3 && random.nextInt(10) == 0) {
+            state = (BlockState)state.with(AGE, i + 1);
+            world.setBlockState(pos, state, Block.NOTIFY_LISTENERS);
         }
     }
 
