@@ -1,9 +1,9 @@
 {
   "type": "minecraft:smelting",
   "ingredient": {
-    "item": "minecraft:blackstone"
+    "item": "gildedingot:gilded_pebble"
   },
-  "result": "gildedingot:smooth_blackstone",
+  "result": "gildedingot:gilded_ingot",
   "experience": 0.2,
   "cookingtime": 200
 }

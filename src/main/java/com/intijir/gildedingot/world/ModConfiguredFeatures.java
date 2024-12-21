@@ -23,7 +23,6 @@ public class ModConfiguredFeatures {
     public static final RegistryKey<ConfiguredFeature<?, ?>> NETHER_GILDED_BLACKSTONE_ORE_KEY = registerKey("nether_gilded_blackstone_ore");
 
     public static void boostrap(Registerable<ConfiguredFeature<?, ?>> context) {
-        //RuleTest basaltReplaceables = new TagMatchRuleTest(BlockTags.BASE_STONE_NETHER);
         RuleTest basaltReplacables = new BlockMatchRuleTest(Blocks.BASALT);
         RuleTest netherStoneReplacables = new TagMatchRuleTest(BlockTags.BASE_STONE_NETHER);
 
@@ -33,7 +32,7 @@ public class ModConfiguredFeatures {
                 List.of(OreFeatureConfig.createTarget(netherStoneReplacables, Blocks.GILDED_BLACKSTONE.getDefaultState()));
 
         register(context, NETHER_BASALT_LAPIS_ORE_KEY, Feature.ORE, new OreFeatureConfig(netherRubyOres, 9));
-        register(context, NETHER_GILDED_BLACKSTONE_ORE_KEY, Feature.ORE, new OreFeatureConfig(endRubyOres, 3));
+        register(context, NETHER_GILDED_BLACKSTONE_ORE_KEY, Feature.ORE, new OreFeatureConfig(endRubyOres, 6));
     }
 
     // Helper funtions
