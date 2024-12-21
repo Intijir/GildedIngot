@@ -51,7 +51,6 @@ public class ModCreativeModeTabs {
 
                     }).build());
 
-
     public static void registerItemGroups() {
         GildedIngot.LOGGER.info("Registering Item Groups for " + GildedIngot.MOD_ID);
     }
