@@ -1,0 +1,23 @@
+{
+  "type": "gildedingot:add_item",
+  "conditions": [
+    {
+      "condition": "neoforge:loot_table_id",
+      "loot_table_id": "minecraft:entities/piglin_brute"
+    },
+    {
+      "condition": "minecraft:random_chance_with_enchanted_bonus",
+      "enchanted_chance": {
+        "type": "minecraft:linear",
+        "base": 0.035,
+        "per_level_above_first": 0.01
+      },
+      "enchantment": "minecraft:looting",
+      "unenchanted_chance": 0.025
+    },
+    {
+      "condition": "minecraft:killed_by_player"
+    }
+  ],
+  "item": "gildedingot:gilded_ingot"
+}

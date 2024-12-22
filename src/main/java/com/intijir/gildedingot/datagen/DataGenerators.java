@@ -19,6 +19,7 @@ import java.util.concurrent.CompletableFuture;
 public class DataGenerators {
     @SubscribeEvent
     public static void gatherData(GatherDataEvent event) {
+        try {
         DataGenerator generator = event.getGenerator();
         PackOutput packOutput = generator.getPackOutput();
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
@@ -37,7 +38,7 @@ public class DataGenerators {
 
         generator.addProvider(event.includeServer(), new ModGlobalLootModifiersProvider(packOutput));
         generator.addProvider(event.includeServer(), new ModPoiTypeTagsProvider(packOutput, lookupProvider, existingFileHelper));
-        */
+
 
         BlockTagsProvider blockTagsProvider = new ModBlockTagProvider(packOutput, lookupProvider, existingFileHelper);
         generator.addProvider(event.includeServer(), blockTagsProvider);
@@ -45,6 +46,11 @@ public class DataGenerators {
 
         generator.addProvider(event.includeClient(), new ModItemModelProvider(packOutput, existingFileHelper));
 
-        generator.addProvider(event.includeServer(), new ModWorldGenProvider(packOutput, lookupProvider));
+        generator.addProvider(event.includeServer(), new ModWorldGenProvider(packOutput, lookupProvider));*/
+
+        generator.addProvider(true, new ModGlobalLootModifiersProvider(packOutput, event.getLookupProvider()));
+        } catch (RuntimeException e) {
+            GildedIngot.LOGGER.error("Failed to gather data", e);
+        }
     }
 }

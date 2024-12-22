@@ -3,6 +3,7 @@ package com.intijir.gildedingot;
 import com.intijir.gildedingot.block.ModBlocks;
 import com.intijir.gildedingot.item.ModCreativeModeTabs;
 import com.intijir.gildedingot.item.ModItems;
+import com.intijir.gildedingot.loot.GildedIngotLootModifiers;
 import com.mojang.logging.LogUtils;
 import org.slf4j.Logger;
 
@@ -24,7 +25,7 @@ import net.neoforged.neoforge.event.server.ServerStartingEvent;
 public class GildedIngot {
     public static final String MOD_ID = "gildedingot";
     public static final String MOD_NAME = "Gilded Ingot";
-    private static final Logger LOGGER = LogUtils.getLogger();
+    public static final Logger LOGGER = LogUtils.getLogger();
 
     public GildedIngot(IEventBus modEventBus, ModContainer modContainer) {
         // Register the commonSetup method for modloading
@@ -39,6 +40,7 @@ public class GildedIngot {
 
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
+        GildedIngotLootModifiers.LOOT_MODIFIERS.register(modEventBus);
 
         //ModDataComponents.register(modEventBus);
 

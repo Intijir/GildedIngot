@@ -1,0 +1,33 @@
+{
+  "type": "gildedingot:add_item",
+  "conditions": [
+    {
+      "condition": "neoforge:loot_table_id",
+      "loot_table_id": "minecraft:entities/piglin_brute"
+    },
+    {
+      "chance": 1.0,
+      "condition": "minecraft:random_chance"
+    }
+  ],
+  "functions": [
+    {
+      "add": false,
+      "count": {
+        "type": "minecraft:uniform",
+        "max": 5.0,
+        "min": 0.0
+      },
+      "function": "minecraft:set_count"
+    },
+    {
+      "enchantment": "minecraft:looting",
+      "formula": "minecraft:uniform_bonus_count",
+      "function": "minecraft:apply_bonus",
+      "parameters": {
+        "bonusMultiplier": 3
+      }
+    }
+  ],
+  "item": "gildedingot:gilded_nugget"
+}
