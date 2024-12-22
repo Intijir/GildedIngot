@@ -7,7 +7,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class GildedBoots extends ArmorItem {
     public GildedBoots() {
-        super(ModArmorMaterials.GILDED, Type.BOOTS, new Properties());
+        super(ModArmorMaterials.GILDED, Type.BOOTS, new Properties().durability(16));
     }
 
     public boolean makesPiglinsNeutral(@NotNull ItemStack stack, @NotNull LivingEntity wearer) { return true; }
