@@ -12,7 +12,7 @@ import net.minecraft.util.Identifier;
 
 public class ModCreativeModeTabs {
     public static final ItemGroup GILDED_INGOT_TAB = Registry.register(Registries.ITEM_GROUP,
-            new Identifier(GildedIngot.MOD_ID, "gilded_ingot"),
+            Identifier.of(GildedIngot.MOD_ID, "gilded_ingot"),
             FabricItemGroup.builder().displayName(Text.translatable("itemgroup.gilded_ingot"))
                     .icon(() -> new ItemStack(ModItems.GILDED_INGOT)).entries((displayContext, entries) -> {
                         // Items

@@ -1,7 +1,6 @@
 package com.intijir.gildedingot.item;
 
 import com.intijir.gildedingot.block.ModBlocks;
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.*;
 import net.minecraft.sound.SoundCategory;
@@ -13,7 +12,7 @@ import net.minecraft.world.World;
 public class WarpedSeed extends BlockItem {
     public WarpedSeed() {
         super(ModBlocks.WARPED_NETHER_WART_CROP,
-                new FabricItemSettings());
+                new Item.Settings());
     }
 
     @Override

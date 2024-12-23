@@ -1,6 +1,6 @@
 package com.intijir.gildedingot.mixin;
 
-import com.intijir.gildedingot.armor.ModArmorMaterials;
+import com.intijir.gildedingot.item.ModArmorMaterials;
 import com.intijir.gildedingot.item.ModItems;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.PiglinBrain;

@@ -3,6 +3,7 @@ package com.intijir.gildedingot;
 import com.intijir.gildedingot.block.ModBlocks;
 import com.intijir.gildedingot.item.ModCreativeModeTabs;
 import com.intijir.gildedingot.item.ModItems;
+import com.intijir.gildedingot.util.ModLootTableModifiers;
 import com.intijir.gildedingot.world.gen.ModWorldGeneration;
 import com.mojang.logging.LogUtils;
 import net.fabricmc.api.ModInitializer;
@@ -22,6 +23,7 @@ public class GildedIngot implements ModInitializer {
         ModCreativeModeTabs.registerItemGroups();
         ModItems.registerModItems();
         ModBlocks.registerModBlocks();
+        ModLootTableModifiers.modifyLootTables();
         ModWorldGeneration.generateModWorldGen();
 
         FuelRegistry.INSTANCE.add(ModItems.GILDED_PEBBLE,4800);

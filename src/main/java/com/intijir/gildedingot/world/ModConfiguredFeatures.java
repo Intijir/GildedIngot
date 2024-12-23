@@ -22,7 +22,7 @@ public class ModConfiguredFeatures {
     public static final RegistryKey<ConfiguredFeature<?, ?>> NETHER_BASALT_LAPIS_ORE_KEY = registerKey("nether_basalt_lapis_ore");
     public static final RegistryKey<ConfiguredFeature<?, ?>> NETHER_GILDED_BLACKSTONE_ORE_KEY = registerKey("nether_gilded_blackstone_ore");
 
-    public static void boostrap(Registerable<ConfiguredFeature<?, ?>> context) {
+    public static void bootstrap(Registerable<ConfiguredFeature<?, ?>> context) {
         RuleTest basaltReplacables = new BlockMatchRuleTest(Blocks.BASALT);
         RuleTest netherStoneReplacables = new TagMatchRuleTest(BlockTags.BASE_STONE_NETHER);
 
@@ -37,7 +37,7 @@ public class ModConfiguredFeatures {
 
     // Helper funtions
     public static RegistryKey<ConfiguredFeature<?, ?>> registerKey(String name) {
-        return RegistryKey.of(RegistryKeys.CONFIGURED_FEATURE, new Identifier(GildedIngot.MOD_ID, name));
+        return RegistryKey.of(RegistryKeys.CONFIGURED_FEATURE, Identifier.of(GildedIngot.MOD_ID, name));
     }
 
     private static <FC extends FeatureConfig, F extends Feature<FC>> void register(Registerable<ConfiguredFeature<?, ?>> context,

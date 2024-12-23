@@ -8,6 +8,6 @@ import net.minecraft.sound.BlockSoundGroup;
 
 public class GildedDoor extends DoorBlock {
     public GildedDoor() {
-        super(AbstractBlock.Settings.copy(Blocks.IRON_BLOCK).nonOpaque().strength(1, 4.2E7F).sounds(BlockSoundGroup.STONE), BlockSetType.IRON);
+        super(BlockSetType.IRON, AbstractBlock.Settings.copy(Blocks.IRON_BLOCK).nonOpaque().strength(4, 4.2E7F).sounds(BlockSoundGroup.STONE));
     }
 }
