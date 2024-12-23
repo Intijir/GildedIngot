@@ -8,9 +8,9 @@ import net.minecraft.client.render.RenderLayer;
 public class GildedIngotClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
-        //BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.GILDED_GLASS, RenderLayer.getCutout());
-        //BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.GILDED_DOOR, RenderLayer.getCutout());
-        //BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.WARPED_NETHER_WART_CROP, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.GILDED_GLASS, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.GILDED_DOOR, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.WARPED_NETHER_WART_CROP, RenderLayer.getCutout());
 
     }
 }
