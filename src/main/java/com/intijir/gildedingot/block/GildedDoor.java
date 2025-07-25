@@ -10,7 +10,7 @@ public class GildedDoor extends DoorBlock {
         super(BlockSetType.IRON,
                 Properties.ofFullCopy(Blocks.IRON_BLOCK)
                         .noOcclusion()
-                        .strength(1, 4.2E7F)
+                        .strength(4, 4.2E7F)
                         .sound(SoundType.STONE));
     }
 }
